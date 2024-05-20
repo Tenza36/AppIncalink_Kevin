@@ -1,0 +1,31 @@
+﻿@model List<recetasPorMenu>
+@{
+    ViewData["Title"] = "Listar Recetas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Listar Recetas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Menú</th>
+            <th>Nombre del Producto</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var receta in Model)
+        {
+            <tr>
+                <td>@receta.id</td>
+                <td>@receta.nombreMenu</td>
+                <td>@receta.nombreProducto</td>
+                <td>@receta.cantidad</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

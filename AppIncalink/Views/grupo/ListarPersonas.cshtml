@@ -1,4 +1,4 @@
-﻿@model List<ListarPersonasNombresModel>
+﻿@model List<personaModel>
 @{
     ViewData["Title"] = "ListarPersonas";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,16 +30,16 @@
             {
                 <tr>
                     <td>@item.nombreCompleto</td>
-                    <td>@item.nombreSexo</td>
+                    <td>@item.idSexo</td>
                     <td>@item.documentoId</td>
                     <td>@item.correo</td>
                     <td>@item.telefono</td>
                     <td>@item.alergiaAlimentacion</td>
                     <td>@item.alegiaVarias</td>
                     <td>@item.observaciones</td>
-                    <td>@item.nombreGrupo</td>
-                    <td>@item.numeroHabitacion</td>
-                    <td>@item.nombreRol</td>
+                    <td>@item.idGrupo</td>
+                    <td>@item.idHabitacion</td>
+                    <td>@item.idRol</td>
 
                 </tr>
             }

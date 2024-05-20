@@ -166,7 +166,7 @@ namespace AppIncalink.Datos
 
         }
 
-        public List<ListarPersonasNombresModel> ObtenerPersonasPorGrupo(int idGrupo)
+        /*public List<ListarPersonasNombresModel> ObtenerPersonasPorGrupo(int idGrupo)
         {
             var oLista = new List<ListarPersonasNombresModel>();
             var cn = new Conexion();
@@ -200,46 +200,43 @@ namespace AppIncalink.Datos
             }
 
             return oLista;
-        }
+        }*/
 
-        /*Obtener menus por grupo
-        public List<recetasModel> ObtenerRecetasPorGrupo(int idGrupo)
+        public List<personaModel> ObtenerPersonasPorGrupo(int idGrupo)
         {
-            var recetas = new List<recetasModel>();
+            var oLista = new List<personaModel>();
             var cn = new Conexion();
-            using (var connection = new SqlConnection(cn.getCadenaSQL()))
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
-                connection.Open();
+                conexion.Open();
 
-                // Consulta SQL para obtener las recetas asociadas a las actividades del grupo
-                var query = "SELECT DISTINCT r.id, r.idMenu, r.idProducto, r.cantidad " +
-                            "FROM recetas r " +
-                            "INNER JOIN actividades a ON r.idMenu = a.idMenu " +
-                            "WHERE a.idGrupo = @idGrupo";
-
-                using (var command = new SqlCommand(query, connection))
+                SqlCommand cmd = new SqlCommand("ObtenerPersonasPorGrupo", conexion); // Ajusta el nombre del procedimiento almacenado
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = cmd.ExecuteReader())
                 {
-                    command.Parameters.AddWithValue("@IdGrupo", idGrupo);
-
-                    using (var reader = command.ExecuteReader())
+                    while (dr.Read())
                     {
-                        while (reader.Read())
+                        oLista.Add(new personaModel()
                         {
-                            var receta = new recetasModel
-                            {
-                                id = (int)reader["id"],
-                                idMenu = (int)reader["idMenu"],
-                                idProducto = (int)reader["idProducto"],
-                                cantidad = (float)reader["cantidad"]
-                            };
-
-                            recetas.Add(receta);
-                        }
+                            id = Convert.ToInt32(dr["id"]),
+                            nombreCompleto = dr["nombreCompleto"].ToString(),
+                            idSexo = Convert.ToInt32(dr["idSexo"]),
+                            documentoId = dr["documentoId"].ToString(),
+                            correo = dr["correo"].ToString(),
+                            telefono = dr["telefono"].ToString(),
+                            alergiaAlimentacion = dr["alergiaAlimentacion"].ToString(),
+                            alegiaVarias = dr["alegiaVarias"].ToString(),
+                            observaciones = dr["observaciones"].ToString(),
+                            idGrupo = Convert.ToInt32(dr["idGrupo"]),
+                            idHabitacion = Convert.ToInt32(dr["idHabitacion"]),
+                            idRol = Convert.ToInt32(dr["idRol"]),
+                        });
                     }
                 }
             }
 
-            return recetas;
-        }*/
+            return oLista;
+        }
     }
 }

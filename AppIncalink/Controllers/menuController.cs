@@ -72,5 +72,13 @@ namespace AppIncalink.Controllers
             else
                 return View();
         }
+
+        public IActionResult ListarRecetas(int idMenu)
+        {
+            var recetas = _menuDatos.ListarRecetas(idMenu);
+            return View(recetas);
+        }
+
+
     }
 }

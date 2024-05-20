@@ -17,8 +17,9 @@
                 <tr>
 
                     <th scope="col">Nombre del Menu</th>
+                    <th>Ver Detalles</th>
                     <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Eliminar</th>      
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +28,15 @@
                     <tr>
                         <td>@item.nombre</td>
                         <td>
+                            <a asp-action="ListarRecetas" asp-controller="menu" class="btn btn-warning  btn-sm" asp-route-id="@item.id">Ver detalle</a>
+                        </td>
+                        <td>
                             <a asp-action="Editar" asp-controller="menu" class="btn btn-primary btn-sm" asp-route-id="@item.id">Editar</a>
                         </td>
                         <td>
                             <a asp-action="Eliminar" asp-controller="menu" class="btn btn-danger btn-sm" asp-route-id="@item.id">Eliminar</a>
                         </td>
-                        <td></td>
+                        
                     </tr>
                 }
             </tbody>

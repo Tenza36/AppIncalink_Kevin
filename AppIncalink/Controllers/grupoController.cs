@@ -51,8 +51,21 @@ namespace AppIncalink.Controllers
                 return RedirectToAction("Listar");
             else return View();
         }
+        public grupoController(grupoDatos grupoDatos)
+        {
+            _grupoDatos = grupoDatos;
+        }
+        public IActionResult DetallesPersona(int idGrupo, int idPersona)
+        {
+            var persona = _personaDatos.Obtener(idPersona);
+            if (persona == null)
+            {
+                // Si no se encuentra la persona, puedes redirigir a una página de error o manejarlo de otra manera
+                return RedirectToAction("Error");
+            }
 
-        
+            return View(persona);
+        }
         public IActionResult ListarPersonas(int idGrupo)
         {
             var personas = _grupoDatos.ObtenerPersonasPorGrupo(idGrupo);

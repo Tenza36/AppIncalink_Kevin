@@ -147,5 +147,37 @@ namespace AppIncalink.Datos
             return rpta;
 
         }
+
+        public List<recetasPorMenu> ListarRecetas(int idMenu)
+        {
+            var lista = new List<recetasPorMenu>();
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand("ListarRecetasPorMenu", conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var receta = new recetasPorMenu
+                            {
+                                id = Convert.ToInt32(dr["id"]),
+                                nombreMenu = dr["nombreMenu"].ToString(),
+                                nombreProducto = dr["nombreProducto"].ToString(),
+                                cantidad = Convert.ToDecimal(dr["cantidad"])
+                            };
+                            lista.Add(receta);
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
     }
 }

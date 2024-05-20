@@ -11,10 +11,6 @@
         public string alergiaAlimentacion { get; set; }
         public string alegiaVarias { get; set; }
         public string observaciones { get; set; }
-        public int? idGrupo { get; set; } // Usamos int? para permitir valores nulos
-        public int? idHabitacion { get; set; } // Usamos int? para permitir valores nulos
-        public int? idRol { get; set; } // Usamos int? para permitir valores nulos
-
         public string numeroHabitacion { get; set; }
         public string nombreSexo { get; set; }
         public string nombreGrupo { get; set; }
