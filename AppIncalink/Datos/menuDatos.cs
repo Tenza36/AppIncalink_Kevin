@@ -152,28 +152,25 @@ namespace AppIncalink.Datos
         {
             var lista = new List<recetasPorMenu>();
             var cn = new Conexion();
-
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
-                using (SqlCommand cmd = new SqlCommand("ListarRecetasPorMenu", conexion))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
+                SqlCommand cmd = new SqlCommand("ListarRecetasPorMenu", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idMenu", idMenu);
+                using (var dr = cmd.ExecuteReader())
+                {               
                         while (dr.Read())
                         {
-                            var receta = new recetasPorMenu
+                            lista.Add(new recetasPorMenu()
                             {
                                 id = Convert.ToInt32(dr["id"]),
                                 nombreMenu = dr["nombreMenu"].ToString(),
                                 nombreProducto = dr["nombreProducto"].ToString(),
                                 cantidad = Convert.ToDecimal(dr["cantidad"])
-                            };
-                            lista.Add(receta);
+                            });
                         }
-                    }
+                    
                 }
             }
 

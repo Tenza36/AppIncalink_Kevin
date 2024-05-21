@@ -166,16 +166,16 @@ namespace AppIncalink.Datos
 
         }
 
-        /*public List<ListarPersonasNombresModel> ObtenerPersonasPorGrupo(int idGrupo)
+        public List<ListarPersonasNombresModel> ObtenerPersonasPorGrupo(int idGrupo)
         {
             var oLista = new List<ListarPersonasNombresModel>();
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
-
-                SqlCommand cmd = new SqlCommand("ListarPersonasNombres", conexion);
+                SqlCommand cmd = new SqlCommand("ObtenerPersonasPorGrupo", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
                 using (var dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
@@ -200,43 +200,9 @@ namespace AppIncalink.Datos
             }
 
             return oLista;
-        }*/
-
-        public List<personaModel> ObtenerPersonasPorGrupo(int idGrupo)
-        {
-            var oLista = new List<personaModel>();
-            var cn = new Conexion();
-            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
-            {
-                conexion.Open();
-
-                SqlCommand cmd = new SqlCommand("ObtenerPersonasPorGrupo", conexion); // Ajusta el nombre del procedimiento almacenado
-                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
-                cmd.CommandType = CommandType.StoredProcedure;
-                using (var dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        oLista.Add(new personaModel()
-                        {
-                            id = Convert.ToInt32(dr["id"]),
-                            nombreCompleto = dr["nombreCompleto"].ToString(),
-                            idSexo = Convert.ToInt32(dr["idSexo"]),
-                            documentoId = dr["documentoId"].ToString(),
-                            correo = dr["correo"].ToString(),
-                            telefono = dr["telefono"].ToString(),
-                            alergiaAlimentacion = dr["alergiaAlimentacion"].ToString(),
-                            alegiaVarias = dr["alegiaVarias"].ToString(),
-                            observaciones = dr["observaciones"].ToString(),
-                            idGrupo = Convert.ToInt32(dr["idGrupo"]),
-                            idHabitacion = Convert.ToInt32(dr["idHabitacion"]),
-                            idRol = Convert.ToInt32(dr["idRol"]),
-                        });
-                    }
-                }
-            }
-
-            return oLista;
         }
+
+        
+       
     }
 }

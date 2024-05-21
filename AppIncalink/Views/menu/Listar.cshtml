@@ -28,7 +28,7 @@
                     <tr>
                         <td>@item.nombre</td>
                         <td>
-                            <a asp-action="ListarRecetas" asp-controller="menu" class="btn btn-warning  btn-sm" asp-route-id="@item.id">Ver detalle</a>
+                            <a asp-action="ListarRecetas" asp-controller="menu" class="btn btn-warning  btn-sm" asp-route-idMenu="@item.id" asp-route-idRecetas="@item.id">Ver detalle</a>
                         </td>
                         <td>
                             <a asp-action="Editar" asp-controller="menu" class="btn btn-primary btn-sm" asp-route-id="@item.id">Editar</a>
