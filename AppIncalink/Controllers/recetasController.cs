@@ -14,7 +14,7 @@ namespace AppIncalink.Controllers
         public IActionResult Listar()
         {
             //La vista mostrara una lista
-            var oLista = _recetasDatos.listar();
+            var oLista = _recetasDatos.listarNombre();
             return View(oLista);
         }
 

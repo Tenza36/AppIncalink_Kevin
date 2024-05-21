@@ -1,0 +1,18 @@
+﻿@model personaModel
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar</h1>
+<form asp-action="Eliminar" asp-controller="persona" method="post">
+    <input asp-for="id" type="hidden" class="form-control">
+    <!--agregando-->
+
+    <div class="alert alert-danger" role="alert">
+        ¿Desea eliminar el Grupo: @Html.DisplayTextFor(m => m.nombreCompleto)?
+    </div>
+
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Listar" asp-controller="grupo" class="btn btn-warning">Volver a la Lista</a>
+
+</form>

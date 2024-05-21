@@ -1,20 +1,32 @@
-﻿@model List<recetasModel>
+﻿@model List<recetasPorMenu>
 @{
     ViewData["Title"] = "Listar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
 <section>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <a asp-action="Listar" asp-controller="menu" class="btn btn-primary" asp-route-id="id">Ver Menus</a>
-        </div>
-        <div class="form-group col-md-6">
-            <a asp-action="Listar" asp-controller="productos" class="btn btn-success " asp-route-id="id">Ver Productos</a>
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <td>
+                    <a asp-action="Guardar" asp-controller="recetas" class="btn btn-success"><i class="icon ion-md-cart mr-2 lead"></i> Crear Receta</a>
+                </td>
+            </div>
+            <div class="col">
+                <td>
+                    <a asp-action="Listar" asp-controller="productos" class="btn btn-warning"><i class="icon ion-md-nutrition mr-2 lead"></i> Agregar Producto</a>
+                </td>
+            </div>
+            <div class="col">
+                <td>
+                    <a asp-action="Listar" asp-controller="menu" class="btn btn-primary"><i class="icon ion-md-pizza mr-2 lead"></i> Crear Menu</a>
+                </td>
+            </div>
         </div>
     </div>
 </section>
-<a asp-action="Guardar" asp-controller="recetas" class="btn btn-success">Crear Receta</a>
+<br />
 <section>
     <div class="container">
         <table class="table">
@@ -31,8 +43,8 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.idMenu</td>
-                        <td>@item.idProducto</td>
+                        <td>@item.nombreMenu</td>
+                        <td>@item.nombreProducto</td>
                         <td>@item.cantidad</td>
                         <td>
                             <a asp-action="Editar" asp-controller="recetas" class="btn btn-primary btn-sm" asp-route-id="@item.id">Editar</a>

@@ -3,8 +3,6 @@
     ViewData["Title"] = "Listar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <br />
 <section>
     <div class="container">
@@ -12,17 +10,17 @@
         <div class="row">
             <div class="col">
                 <td>
-                    <a asp-action="Guardar" asp-controller="menu" class="btn btn-primary">Crear Menu</a>
+                    <a asp-action="Guardar" asp-controller="menu" class="btn btn-primary"><i class="icon ion-md-pizza mr-2 lead"></i> Crear Menu</a>
                 </td>
             </div>
             <div class="col">
                 <td>
-                    <a asp-action="Listar" asp-controller="recetas" class="btn btn-warning"><i class="icon ion-md-cart"></i> Agregar Receta</a>
+                    <a asp-action="Listar" asp-controller="recetas" class="btn btn-warning"><i class="icon ion-md-cart mr-2 lead"></i> Agregar Receta</a>
                 </td>
             </div>
             <div class="col">
                 <td>
-                    <a asp-action="Listar" asp-controller="productos" class="btn btn-info"><i class="icon ion-md-nutrition"></i> Agregar Producto</a>
+                    <a asp-action="Listar" asp-controller="productos" class="btn btn-info"><i class="icon ion-md-nutrition mr-2 lead"></i> Agregar Producto</a>
                 </td>
             </div>
         </div>

@@ -5,10 +5,31 @@
 }
 
 
-<a asp-action="Guardar" asp-controller="actividad" class="btn btn-success">Crear Actividad</a>
+<br />
+<section>
+    <div class="container">
 
-</hr>
+        <div class="row">
+            <div class="col">
+                <td>
+                    <a asp-action="Guardar" asp-controller="actividad" class="btn btn-success"><i class="icon ion-logo-dribbble mr-2 lead"></i> Crear Actividad</a>
+                </td>
+            </div>
+            <div class="col">
+                <td>
+                    <a asp-action="Listar" asp-controller="persona" class="btn btn-warning"><i class="icon ion-md-person mr-2 lead"></i> Crear Persona</a>
+                </td>
+            </div>
+            <div class="col">
+                <td>
+                    <a asp-action="Listar" asp-controller="grupo" class="btn btn-info"><i class="icon ion-md-people mr-2 lead"></i> Crear Grupo</a>
+                </td>
+            </div>
+        </div>
+    </div>
+</section>
 
+<br />
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped">

@@ -4,10 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Listar</h1>
-<a asp-action="Guardar" asp-controller="productos" class="btn btn-success">Crear Habitación</a>
-</hr>
+<br />
+<section>
+    <div class="container">
 
+        <div class="row">
+            <div class="col">
+                <td>
+                    <a asp-action="Guardar" asp-controller="productos" class="btn btn-success"><i class="icon ion-md-nutrition mr-2 lead"></i>Crear Producto</a>
+                </td>
+            </div>
+            <div class="col">
+                <td>
+                    <a asp-action="Listar" asp-controller="recetas" class="btn btn-warning"><i class="icon ion-md-cart mr-2 lead"></i> Agregar Receta</a>
+                </td>
+            </div>
+            <div class="col">
+                <td>
+                    <a asp-action="Listar" asp-controller="menu" class="btn btn-primary"><i class="icon ion-md-pizza mr-2 lead"></i> Crear Menu</a>
+                </td>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
 <section>
     <div class="container">
         <table class="table">

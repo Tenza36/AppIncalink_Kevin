@@ -53,5 +53,25 @@ namespace AppIncalink.Controllers
             return Json(todosEventosJson);
 
         }
+
+        private string GetColorForActivity(actividadesModel actividad)
+        {
+            if (actividad.idMenu.HasValue)
+            {
+                return "orange";
+            }
+            else if (actividad.idTipoActividad.HasValue)
+            {
+                return "blue";
+            }
+            else if (actividad.idVehiculo.HasValue)
+            {
+                return "gray";
+            }
+            else
+            {
+                return "defaultColor"; // Color predeterminado si no coincide ninguna condición
+            }
+        }
     }
 }
