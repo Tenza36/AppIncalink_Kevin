@@ -45,6 +45,7 @@
                 <th scope="col">Tipo Actividad</th>
                 <th scope="col">Menu</th>
                 <th scope="col">Vehiculo</th>
+           
                 <th>Ver Detalle</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -66,6 +67,7 @@
                     <td>@item.nombreTipoActividad</td>
                     <td>@item.nombreMenu</td>
                     <td>@item.nombreVehiculo</td>
+
                     <td>
                         <a asp-action="ListarActividad" asp-controller="actividad" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Detalles</a>
                     </td>

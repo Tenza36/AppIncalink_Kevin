@@ -202,7 +202,35 @@ namespace AppIncalink.Datos
             return oLista;
         }
 
-        
-       
+        public List<comprasModel> ListaCompras(int idGrupo)
+        {
+            var oLista = new List<comprasModel>();
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ListarComprasPorGrupo", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        oLista.Add(new comprasModel()
+                        {
+                            nombreGrupo = dr["nombreGrupo"].ToString(),
+                            nombreProducto = dr["nombreProducto"].ToString(),
+                            tipoMedida = dr["tipoMedida"].ToString(),
+                            cantidad = Convert.ToSingle(dr["cantidad"])
+                        });
+                    }
+                }
+            }
+
+            return oLista;
+        }
+
+
+
     }
 }

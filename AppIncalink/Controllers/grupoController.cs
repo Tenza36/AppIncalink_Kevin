@@ -71,6 +71,11 @@ namespace AppIncalink.Controllers
             var personas = _grupoDatos.ObtenerPersonasPorGrupo(idGrupo);
             return View(personas);
         }
+        public IActionResult ListarCompras(int idGrupo)
+        {
+            var compras = _grupoDatos.ListaCompras(idGrupo);
+            return View(compras);
+        }
 
         public IActionResult Eliminar(int id)
         {
@@ -89,6 +94,8 @@ namespace AppIncalink.Controllers
             else
                 return View();
         }
+
+
     }
 
 }

@@ -29,7 +29,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-pattern: "{controller=reportes}/{action=index}/{id?}");
+pattern: "{controller=Home}/{action=index}/{id?}");
 //pattern: "{controller=calendario}/{action=Calendario}/{id?}");
 
 app.Run();

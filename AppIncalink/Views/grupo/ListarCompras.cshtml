@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AppIncalink.Models.comprasModel>
+
+@{
+    ViewData["Title"] = "Lista de Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Lista de Compras</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre del Grupo</th>
+            <th>Producto</th>
+            <th>Tipo de Medida</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var compra in Model)
+        {
+            <tr>
+                <td>@compra.nombreGrupo</td>
+                <td>@compra.nombreProducto</td>
+                <td>@compra.tipoMedida</td>
+                <td>@compra.cantidad</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="ListarGrupos" class="btn btn-warning">Volver a los Grupos</a>

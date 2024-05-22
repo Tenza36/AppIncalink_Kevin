@@ -42,6 +42,7 @@
                 <th scope="col">Informacion del Vuelo</th>
                 <th scope="col">Itinerario del Vuelo</th>
                 <th scope="col">Observaciones</th>
+                <th>Ver Compras</th>
                 <th>Ver Detalles</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -57,6 +58,9 @@
                     <td>@item.informacionVuelo</td>
                     <td>@item.intinerarioVuelo</td>
                     <td>@item.observaciones</td>
+                    <td>
+                        <a asp-action="ListarCompras" asp-controller="grupo" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Compras</a>
+                    </td>
                     <td>
                         <a asp-action="ListarPersonas" asp-controller="grupo" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Detalles</a>
                     </td>
