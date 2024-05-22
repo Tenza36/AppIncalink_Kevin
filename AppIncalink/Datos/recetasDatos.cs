@@ -28,7 +28,7 @@ namespace AppIncalink.Datos
                             id = Convert.ToInt32(dr["id"]),
                             idMenu = Convert.ToInt32(dr["idMenu"]),
                             idProducto = Convert.ToInt32(dr["idProducto"]),
-                            cantidad = Convert.ToSingle(dr["cantidad"])
+                            cantidad = Convert.ToDecimal(dr["cantidad"])
                         });
                     }
                 }
@@ -85,7 +85,7 @@ namespace AppIncalink.Datos
                         orecetas.id = Convert.ToInt32(dr["id"]);
                         orecetas.idMenu = Convert.ToInt32(dr["idMenu"]);
                         orecetas.idProducto = Convert.ToInt32(dr["idProducto"]);
-                        orecetas.cantidad = Convert.ToSingle(dr["cantidad"]);
+                        orecetas.cantidad = Convert.ToDecimal(dr["cantidad"]);
                     }
                 }
             }
@@ -106,7 +106,7 @@ namespace AppIncalink.Datos
                     SqlCommand cmd = new SqlCommand("InsertarRecetas", conexion);
                     cmd.Parameters.AddWithValue("@idMenu", orecetas.idMenu);
                     cmd.Parameters.AddWithValue("@idProducto", orecetas.idProducto);
-                    cmd.Parameters.AddWithValue("@cantidad", orecetas.cantidad);
+                    cmd.Parameters.Add("@cantidad", SqlDbType.Decimal).Value = orecetas.cantidad;
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();
@@ -146,7 +146,7 @@ namespace AppIncalink.Datos
                             var receta = new recetasModel
                             {
                                 idProducto = Convert.ToInt32(reader["idProducto"]),
-                                cantidad = Convert.ToSingle(reader["cantidad"])
+                                cantidad = Convert.ToDecimal(reader["cantidad"])
                             };
 
                             productos.Add(receta);
@@ -156,6 +156,33 @@ namespace AppIncalink.Datos
             }
 
             return productos;
+        }
+
+        public bool Eliminar(int id)
+        {
+            bool rpta;
+            try
+            {
+                var cn = new Conexion();
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd = new SqlCommand("EliminarRecetas", conexion);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+
+            return rpta;
+
         }
     }
 }

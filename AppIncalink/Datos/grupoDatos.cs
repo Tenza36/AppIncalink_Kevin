@@ -221,8 +221,9 @@ namespace AppIncalink.Datos
                             nombreGrupo = dr["nombreGrupo"].ToString(),
                             nombreProducto = dr["nombreProducto"].ToString(),
                             tipoMedida = dr["tipoMedida"].ToString(),
-                            cantidad = Convert.ToSingle(dr["cantidad"])
+                            cantidad = (float)Convert.ToDecimal(dr["cantidadTotal"])
                         });
+
                     }
                 }
             }

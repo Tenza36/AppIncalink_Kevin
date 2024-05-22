@@ -109,5 +109,23 @@ namespace AppIncalink.Controllers
 
         }
 
+        public IActionResult Eliminar(int id)
+        {
+            //metodo que devuleve la vista
+            var omenu = _recetasDatos.Obtener(id);
+            return View(omenu);
+        }
+        [HttpPost]
+        public IActionResult Eliminar(menuModel omenu)
+        {
+
+            var respuesta = _recetasDatos.Eliminar(omenu.id);
+            if (respuesta)
+
+                return RedirectToAction("Listar");
+            else
+                return View();
+        }
+
     }
 }
