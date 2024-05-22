@@ -56,27 +56,60 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>Tipo de Actividad</label>
-            <select asp-for="idTipoActividad" class="form-control" onchange="mostrarOcultarCampos()" asp-items="ViewBag.tipoActividadOptions">
-                <option value="">Selecciona Tipoo de actividad</option>
-                <option value="@ViewBag.NombreTipoActividad">@ViewBag.NombreTipoActividad</option>
-            </select>
-        </div>
-
-        <div class="form-group col-md-6">
-            <select id="menuSelect" asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
-                <option value="">Selecciona Menú</option>
-                <option value="@ViewBag.NombreMenu">@ViewBag.NombreMenu</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <select id="vehiculoSelect" asp-for="idVehiculo" class="form-control" asp-items="ViewBag.vehiculoOptions">
-                <option value="">Selecciona Vehiculo</option>
-                <option value="@ViewBag.NombreTransporte">@ViewBag.NombreTransporte</option>
+            <label>Selecciona una opción</label>
+            <select id="selectOpciones" class="form-control" onchange="mostrarOcultarCampos()">
+                <option value="">Selecciona una opción</option>
+                <option value="otros">Otros</option>
+                <option value="menu">Menú</option>
+                <option value="vehiculo">Vehículo</option>
             </select>
         </div>
     </div>
+
+    <div id="otrosSelect" class="form-group col-md-6 d-none">
+        <label>Tipo de Actividad</label>
+        <select asp-for="idTipoActividad" class="form-control" onchange="mostrarOcultarCampos()" asp-items="ViewBag.tipoActividadOptions">
+            <option value="">Selecciona Tipoo de actividad</option>
+            <option value="@ViewBag.NombreTipoActividad">@ViewBag.NombreTipoActividad</option>
+        </select>
+    </div>
+
+    <div id="menuSelect" class="form-group col-md-6 d-none">
+        <label>Menú</label>
+        <select id="menuSelect" asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
+            <option value="">Selecciona Menú</option>
+            <option value="@ViewBag.NombreMenu">@ViewBag.NombreMenu</option>
+        </select>
+    </div>
+
+    <div id="vehiculoSelect" class="form-group col-md-6 d-none">
+        <label>Vehículo</label>
+        <select id="vehiculoSelect" asp-for="idVehiculo" class="form-control" asp-items="ViewBag.vehiculoOptions">
+            <option value="">Selecciona Vehiculo</option>
+            <option value="@ViewBag.NombreTransporte">@ViewBag.NombreTransporte</option>
+        </select>
+    </div>
+
     <button type="submit" class="btn btn-primary">Agregar Actividad</button>
     <a asp-action="Listar" asp-controller="actividad" class="btn btn-warning">Volver a la Lista</a>
 </form>
 
+<script>
+    function mostrarOcultarCampos() {
+        var opcionSeleccionada = document.getElementById("selectOpciones").value;
+
+        // Ocultar todos los selects primero
+        document.getElementById("otrosSelect").classList.add("d-none");
+        document.getElementById("menuSelect").classList.add("d-none");
+        document.getElementById("vehiculoSelect").classList.add("d-none");
+
+        // Mostrar el select correspondiente a la opción seleccionada
+        if (opcionSeleccionada === "otros") {
+            document.getElementById("otrosSelect").classList.remove("d-none");
+        } else if (opcionSeleccionada === "menu") {
+            document.getElementById("menuSelect").classList.remove("d-none");
+        } else if (opcionSeleccionada === "vehiculo") {
+            document.getElementById("vehiculoSelect").classList.remove("d-none");
+        }
+    }
+</script>
