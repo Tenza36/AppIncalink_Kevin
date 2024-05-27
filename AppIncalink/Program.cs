@@ -1,6 +1,6 @@
 using QuestPDF.Infrastructure;
 using AppIncalink.Datos;
-using AppIncalink.Extension;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
