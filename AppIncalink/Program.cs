@@ -1,5 +1,4 @@
-using DinkToPdf;
-using DinkToPdf.Contracts;
+using QuestPDF.Infrastructure;
 using AppIncalink.Datos;
 using AppIncalink.Extension;
 
@@ -11,9 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<actividadesDatos>();
 builder.Services.AddScoped<grupoDatos>();
 
-var context = new CustomAssemblyLoadContext();
-context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "LibreriaPDF/libwkhtmltox.dll"));
-builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+// Configurar QuestPDF
+QuestPDF.Settings.License = LicenseType.Community; // Usa LicenseType.Commercial si tienes una licencia comercial
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
