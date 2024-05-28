@@ -76,7 +76,12 @@ namespace AppIncalink.Controllers
         public IActionResult ListarCompras(int idGrupo)
         {
             var compras = _grupoDatos.ListaCompras(idGrupo);
-            return View(compras);
+            var viewModel = new ComprasViewModel
+            {
+                IdGrupo = idGrupo,
+                Compras = compras
+            };
+            return View(viewModel);
         }
 
         public IActionResult Eliminar(int id)

@@ -1,26 +1,21 @@
-﻿@model IEnumerable<AppIncalink.Models.comprasModel>
+﻿@model AppIncalink.Models.ComprasViewModel
 
-@{
-    ViewData["Title"] = "Lista de Compras";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<h3>Lista de Compras del Grupo @Model.IdGrupo:</h3>
 
-<h3>Lista de Compras:</h3>
-  <a asp-controller="Home"
-   asp-action="GenerarPdfCompras"
-                           class="btn btn-info text-white">Generar PDF</a>
 <table class="table">
     <thead>
         <tr>
-            <th>Producto</th>
+            <th>Nombre del Grupo</th>
+            <th>Nombre del Producto</th>
             <th>Tipo de Medida</th>
             <th>Cantidad</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var compra in Model)
+        @foreach (var compra in Model.Compras)
         {
             <tr>
+                <td>@compra.nombreGrupo</td>
                 <td>@compra.nombreProducto</td>
                 <td>@compra.tipoMedida</td>
                 <td>@compra.cantidad</td>
@@ -28,4 +23,8 @@
         }
     </tbody>
 </table>
-<a asp-action="Listar" asp-controller="grupo" class="btn btn-warning">Volver a los Grupos</a>
+
+<a asp-controller="Home"
+   asp-action="GenerarComprasPdf"
+   asp-route-idGrupo="@Model.IdGrupo"
+   class="btn btn-info text-white">Generar PDF</a>

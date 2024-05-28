@@ -11,6 +11,7 @@ builder.Services.AddSingleton<actividadesDatos>();
 builder.Services.AddScoped<grupoDatos>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<actividadesDatos>();
+builder.Services.AddTransient<reportesDatos>();
 // Configurar QuestPDF
 QuestPDF.Settings.License = LicenseType.Community; // Usa LicenseType.Commercial si tienes una licencia comercial
 
