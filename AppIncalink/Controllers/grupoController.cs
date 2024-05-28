@@ -8,6 +8,8 @@ namespace AppIncalink.Controllers
     {
         grupoDatos _grupoDatos = new grupoDatos();
         personaDatos _personaDatos = new personaDatos();
+
+
         public IActionResult Listar()
         {
             //La vista mostrara una lista

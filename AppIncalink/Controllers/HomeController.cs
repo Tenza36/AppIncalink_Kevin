@@ -13,6 +13,7 @@ namespace AppIncalink.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly actividadesDatos _actividadesDatos;
 
+
         public HomeController(ILogger<HomeController> logger, actividadesDatos actividadesDatos)
         {
             _logger = logger;

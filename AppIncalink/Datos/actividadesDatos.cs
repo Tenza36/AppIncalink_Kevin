@@ -189,8 +189,7 @@ namespace AppIncalink.Datos
             {
                 container.Page(page =>
                 {
-                    page.Size(PageSizes.A4);
-                   
+                    page.Size(PageSizes.A4.Landscape());
                     page.Margin(2, Unit.Centimetre);
 
                     page.Header()
@@ -219,41 +218,64 @@ namespace AppIncalink.Datos
                     page.Content()
                         .Table(table =>
                         {
+                            // Definición de columnas
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                columns.RelativeColumn(); // Nombre
+                                columns.RelativeColumn(); // Grupo
+                                columns.RelativeColumn(); // Fecha Inicio
+                                columns.RelativeColumn(); // Fecha Fin
+                                columns.RelativeColumn(); // Recursos
+                                columns.RelativeColumn(); // Responsables
+                                columns.RelativeColumn(); // Lugar Desde
+                                columns.RelativeColumn(); // Lugar Hacia
+                                columns.RelativeColumn(); // Observaciones
+                                columns.RelativeColumn(); // Tipo de Actividad
+                                columns.RelativeColumn(); // Menú
+                                columns.RelativeColumn(); // Vehículo
                             });
 
+                            // Encabezado de la tabla
                             table.Header(header =>
                             {
-                                header.Cell().Text("Nombre").Bold();
-                                header.Cell().Text("Grupo").Bold();
-                                header.Cell().Text("Fecha Inicio").Bold();
-                                header.Cell().Text("Fecha Fin").Bold();
-                                header.Cell().Text("Recursos").Bold();
-                                header.Cell().Text("Responsables").Bold();
-                                header.Cell().Text("Observaciones").Bold();
+                                var headerCells = new string[]
+                                {
+                        "Nombre", "Grupo", "Fecha Inicio", "Fecha Fin", "Recursos", "Responsables", "Lugar Desde",
+                        "Lugar Hacia", "Observaciones", "Tipo de Actividad", "Menú", "Vehículo"
+                                };
+
+                                foreach (var headerText in headerCells)
+                                {
+                                    header.Cell()
+                                        .Background(Colors.Grey.Lighten2)
+                                        .Padding(5)
+                                        .AlignCenter()
+                                        .Text(headerText)
+                                        .Bold()
+                                        .FontColor(Colors.White);
+                                }
                             });
 
+                            // Filas de la tabla con datos de actividades
                             foreach (var actividad in actividades)
                             {
-                                table.Cell().Text(actividad.nombre);
-                                table.Cell().Text(actividad.nombreGrupo);
-                                table.Cell().Text(actividad.fechaInicio.ToString("dd/MM/yyyy"));
-                                table.Cell().Text(actividad.fechaFin.ToString("dd/MM/yyyy"));
-                                table.Cell().Text(actividad.recursos);
-                                table.Cell().Text(actividad.responsables);
-                                table.Cell().Text(actividad.observaciones);
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.nombre));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.nombreGrupo));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.fechaInicio.ToString("dd/MM/yyyy")));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.fechaFin.ToString("dd/MM/yyyy")));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.recursos));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.responsables));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.lugarDesde));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.LugarHacia));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.observaciones));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.nombreTipoActividad));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.nombreMenu));
+                                table.Cell().BorderBottom(1).BorderColor(Colors.Black).Padding(5).Element(CellText => CellText.Text(actividad.nombreVehiculo));
                             }
                         });
 
                     page.Footer()
+                        .AlignCenter()
                         .Text(text =>
                         {
                             text.Span("Page ");
@@ -263,6 +285,9 @@ namespace AppIncalink.Datos
                         });
                 });
             }).GeneratePdf(pdfStream);
+
+            pdfStream.Position = 0;
+            return pdfStream;
 
             pdfStream.Position = 0;
             return pdfStream;

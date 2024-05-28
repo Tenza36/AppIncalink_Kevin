@@ -1,11 +1,17 @@
 ﻿using AppIncalink.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
+using QuestPDF.Helpers;
 namespace AppIncalink.Datos
 {
     public class grupoDatos
     {
+       
         //Metodo Listar
         public List<grupoModel> listar()
         {
@@ -230,6 +236,8 @@ namespace AppIncalink.Datos
 
             return oLista;
         }
+
+       
 
 
 

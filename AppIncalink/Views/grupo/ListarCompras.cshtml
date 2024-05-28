@@ -5,11 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Lista de Compras</h3>
+<h3>Lista de Compras:</h3>
+  <a asp-controller="Home"
+   asp-action="GenerarPdfCompras"
+                           class="btn btn-info text-white">Generar PDF</a>
 <table class="table">
     <thead>
         <tr>
-            <th>Nombre del Grupo</th>
             <th>Producto</th>
             <th>Tipo de Medida</th>
             <th>Cantidad</th>
@@ -19,7 +21,6 @@
         @foreach (var compra in Model)
         {
             <tr>
-                <td>@compra.nombreGrupo</td>
                 <td>@compra.nombreProducto</td>
                 <td>@compra.tipoMedida</td>
                 <td>@compra.cantidad</td>
@@ -27,4 +28,4 @@
         }
     </tbody>
 </table>
-<a asp-action="ListarGrupos" class="btn btn-warning">Volver a los Grupos</a>
+<a asp-action="Listar" asp-controller="grupo" class="btn btn-warning">Volver a los Grupos</a>
