@@ -8,7 +8,12 @@ namespace AppIncalink.Controllers
 {
     public class actividadController : Controller
     {
-        actividadesDatos _actividadesDatos = new actividadesDatos();
+        private readonly actividadesDatos _actividadesDatos;
+        
+        public actividadController(IWebHostEnvironment env)
+        {
+            _actividadesDatos = new actividadesDatos(env);
+        }
         public IActionResult Listar()
         {
             //La vista mostrara una lista

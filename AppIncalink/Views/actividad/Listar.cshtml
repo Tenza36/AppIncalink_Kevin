@@ -30,7 +30,7 @@
 <br />
 
 <div class="table-responsive">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped thead-dark table-responsive">
         <thead>
             <tr>
                 <th scope="col">Nombre</th>
@@ -45,9 +45,6 @@
                 <th scope="col">Tipo Actividad</th>
                 <th scope="col">Menu</th>
                 <th scope="col">Vehiculo</th>
-           
-                <th>Ver Detalle</th>
-                <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
@@ -67,13 +64,6 @@
                     <td>@item.nombreTipoActividad</td>
                     <td>@item.nombreMenu</td>
                     <td>@item.nombreVehiculo</td>
-
-                    <td>
-                        <a asp-action="ListarActividad" asp-controller="actividad" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Detalles</a>
-                    </td>
-                    <td>
-                        <a asp-action="Editar" asp-controller="actividad" class="btn btn-primary btn-sm" asp-route-id="@item.id">Editar</a>
-                    </td>
                     <td>
                         <a asp-action="Eliminar" asp-controller="actividad" class="btn btn-danger btn-sm" asp-route-id="@item.id">Eliminar</a>
                     </td>
@@ -83,3 +73,6 @@
         </tbody>
     </table>
 </div>
+<a asp-controller="Home"
+   asp-action="GenerarPdf"
+   class="btn btn-info text-white">Generar PDF</a>

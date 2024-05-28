@@ -11,6 +11,12 @@ namespace AppIncalink.Datos
 {
     public class actividadesDatos
     {
+        private readonly IWebHostEnvironment _env;
+
+        public actividadesDatos(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
         //Metodo Listar
         public List<nombreActividadesModel> listar()
         {
@@ -171,22 +177,44 @@ namespace AppIncalink.Datos
         }
 
 
-
+        
         public MemoryStream GeneratePdf(List<nombreActividadesModel> actividades)
         {
             var pdfStream = new MemoryStream();
+            // Obtener la ruta absoluta de la imagen
+            var imagePath = Path.Combine(_env.WebRootPath, "img", "Inca-Link-Ecuador_SQ_White-1.png");
+            byte[] imageData = File.ReadAllBytes(imagePath);
 
             Document.Create(container =>
             {
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4);
+                   
                     page.Margin(2, Unit.Centimetre);
+
                     page.Header()
-                        .Text("Listado de Actividades")
-                        .FontSize(20)
-                        .Bold()
-                        .AlignCenter();
+                        .Element(element =>
+                        {
+                            element.Row(row =>
+                            {
+                                row.RelativeColumn()
+                                    .Element(imageContainer =>
+                                    {
+                                        imageContainer
+                                            .Height(100) // Ajusta la altura del contenedor
+                                            .Width(100) // Ajusta el ancho del contenedor si es necesario
+                                            .Image(imageData, ImageScaling.FitArea); // Ajusta la imagen dentro del contenedor
+                                    });
+
+                                row.RelativeColumn()
+                                    .AlignCenter()
+                                    .AlignMiddle()
+                                    .Text("Listado de Actividades")
+                                    .FontSize(20)
+                                    .Bold();
+                            });
+                        });
 
                     page.Content()
                         .Table(table =>
@@ -204,24 +232,24 @@ namespace AppIncalink.Datos
 
                             table.Header(header =>
                             {
-                                header.Cell().Text("ID").Bold();
                                 header.Cell().Text("Nombre").Bold();
                                 header.Cell().Text("Grupo").Bold();
                                 header.Cell().Text("Fecha Inicio").Bold();
                                 header.Cell().Text("Fecha Fin").Bold();
                                 header.Cell().Text("Recursos").Bold();
                                 header.Cell().Text("Responsables").Bold();
+                                header.Cell().Text("Observaciones").Bold();
                             });
 
                             foreach (var actividad in actividades)
                             {
-                                table.Cell().Text(actividad.id.ToString());
                                 table.Cell().Text(actividad.nombre);
                                 table.Cell().Text(actividad.nombreGrupo);
                                 table.Cell().Text(actividad.fechaInicio.ToString("dd/MM/yyyy"));
                                 table.Cell().Text(actividad.fechaFin.ToString("dd/MM/yyyy"));
                                 table.Cell().Text(actividad.recursos);
                                 table.Cell().Text(actividad.responsables);
+                                table.Cell().Text(actividad.observaciones);
                             }
                         });
 
@@ -233,13 +261,14 @@ namespace AppIncalink.Datos
                             text.Span(" of ");
                             text.TotalPages();
                         });
-                        
                 });
             }).GeneratePdf(pdfStream);
 
             pdfStream.Position = 0;
             return pdfStream;
         }
-    
-}
+
+
+
+    }
 }
