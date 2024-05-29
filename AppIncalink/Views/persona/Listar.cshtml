@@ -47,6 +47,7 @@
                 <th scope="col">Grupo</th>
                 <th scope="col">Habitación</th>
                 <th scope="col">Rol</th>
+                <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
@@ -65,6 +66,9 @@
                     <td>@item.nombreGrupo</td>
                     <td>@item.numeroHabitacion</td>
                     <td>@item.nombreRol</td>
+                    <td>
+                        <a asp-action="Editar" asp-controller="persona" class="btn btn-warning btn-sm" asp-route-id="@item.id">Editar</a>
+                    </td>
                     <td>
                         <a asp-action="Eliminar" asp-controller="persona" class="btn btn-danger btn-sm" asp-route-id="@item.id">Eliminar</a>
                     </td>

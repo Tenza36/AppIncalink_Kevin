@@ -8,31 +8,46 @@ namespace AppIncalink.Datos
     public class habitacionDatos
     {
         //Metodo Listar
-        public List<habitacionModel> listar()
+        public List<nhabitacionModel> listar()
         {
-            var oLista = new List<habitacionModel>();
+            var oLista = new List<nhabitacionModel>();
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
 
-                SqlCommand cmd = new SqlCommand("ListarHabitaciones", conexion);
-                cmd.CommandType = CommandType.StoredProcedure;
+                string query = @"SELECT h.id, h.numCamas, COUNT(p.id) AS NumPersonasAsignadas 
+                         FROM habitacion h 
+                         LEFT JOIN persona p ON h.id = p.idHabitacion 
+                         GROUP BY h.id, h.numCamas";
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
                 using (var dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        oLista.Add(new habitacionModel()
+                        var habitacion = new nhabitacionModel
                         {
                             id = Convert.ToInt32(dr["id"]),
-                            numCamas = Convert.ToInt32(dr["numCamas"])
-                        });
+                            numCamas = Convert.ToInt32(dr["numCamas"]),
+                            Personas = new List<personaModel>()
+                        };
+
+                        int numPersonasAsignadas = Convert.ToInt32(dr["NumPersonasAsignadas"]);
+
+                        for (int i = 0; i < numPersonasAsignadas; i++)
+                        {
+                            habitacion.Personas.Add(new personaModel());
+                        }
+
+                        oLista.Add(habitacion);
                     }
                 }
             }
 
             return oLista;
         }
+
 
 
         //Metodo obtener datos

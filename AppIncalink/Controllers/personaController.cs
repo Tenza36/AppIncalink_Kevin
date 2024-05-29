@@ -30,6 +30,7 @@ namespace AppIncalink.Controllers
                 return result != null ? result.ToString() : string.Empty;
             }
         }
+
         public string ObtenerId(int? id, string tabla)
         {
             if (!id.HasValue)
@@ -53,17 +54,15 @@ namespace AppIncalink.Controllers
 
         public IActionResult Listar()
         {
-            //La vista mostrara una lista
+            //La vista mostrará una lista
             var oLista = _personaDatos.listar();
             return View(oLista);
         }
 
-        //Listar Grupo en mi Select
-
         private List<SelectListItem> GetSexoOptions()
         {
             var sexoOptions = new List<SelectListItem>
-             {
+            {
                 new SelectListItem { Value = "1", Text = "Masculino" },
                 new SelectListItem { Value = "2", Text = "Femenino" }
             };
@@ -84,27 +83,33 @@ namespace AppIncalink.Controllers
                 });
             }
             return grupoOptions;
-
         }
 
-        //listar habitacion para mi select
         private List<SelectListItem> GetHabitacionOptions()
         {
             var habitacionDatos = new habitacionDatos();
-            var habitacion = habitacionDatos.listar();
-            var grupoOptions = new List<SelectListItem>();
-            foreach (var habitaciones in habitacion)
+            var habitaciones = habitacionDatos.listar();
+            var habitacionOptions = new List<SelectListItem>();
+
+            foreach (var habitacion in habitaciones)
             {
-                grupoOptions.Add(new SelectListItem
+                // Calcula el número de personas asignadas a la habitación
+                int numPersonasAsignadas = habitacion.Personas.Count;
+
+                if (numPersonasAsignadas < habitacion.numCamas)
                 {
-                    Text = habitaciones.numCamas.ToString(),
-                    Value = habitaciones.id.ToString()
-                });
+                    habitacionOptions.Add(new SelectListItem
+                    {
+                        Text = $"Habitación {habitacion.id} - {habitacion.numCamas} camas",
+                        Value = habitacion.id.ToString()
+                    });
+                }
             }
-            return grupoOptions;
+
+            return habitacionOptions;
         }
 
-        //Listar rol para mi select
+
         private List<SelectListItem> GetRolOptions()
         {
             var rolDatos = new rolDatos();
@@ -121,12 +126,8 @@ namespace AppIncalink.Controllers
             return rolOptions;
         }
 
-
-
-
         public IActionResult Guardar(int id)
         {
-
             var persona = _personaDatos.Obtener(id);
 
             if (persona == null)
@@ -139,10 +140,12 @@ namespace AppIncalink.Controllers
             var nombreGrupo = ObtenerNombrePorId(persona.idGrupo, "grupo");
             var numeroHabitacion = ObtenerId(persona.idHabitacion, "habitacion");
             var nombreRol = ObtenerNombrePorId(persona.idRol, "rol");
+
             ViewBag.SexoOptions = new SelectList(GetSexoOptions(), "Value", "Text", persona.idSexo);
             ViewBag.GrupoOptions = new SelectList(GetGrupoOptions(), "Value", "Text", persona.idGrupo);
             ViewBag.HabitacionOptions = new SelectList(GetHabitacionOptions(), "Value", "Text", persona.idHabitacion);
             ViewBag.RolOptions = new SelectList(GetRolOptions(), "Value", "Text", persona.idRol);
+
             ViewBag.NombreSexo = nombreSexo;
             ViewBag.NombreGrupo = nombreGrupo;
             ViewBag.NumeroHabitacion = numeroHabitacion;
@@ -150,20 +153,22 @@ namespace AppIncalink.Controllers
 
             return View(persona);
         }
+
+
         [HttpPost]
         public IActionResult Guardar(personaModel oPersona)
         {
-            //Metodo recibe el obejeto para guardarlo en bd
+            // Método recibe el objeto para guardarlo en BD
             if (!ModelState.IsValid)
                 return View();
+
             var respuesta = _personaDatos.Guardar(oPersona);
             if (respuesta)
-
                 return RedirectToAction("Listar");
-            else return View();
-
+            else
+                return View();
         }
-        //Metodo de editar perdonas
+
         public IActionResult Editar(int id)
         {
             var opersona = _personaDatos.Obtener(id);
@@ -181,37 +186,37 @@ namespace AppIncalink.Controllers
 
             // Asignar las opciones de los SelectList a ViewBag
             ViewBag.SexoOptions = new SelectList(GetSexoOptions(), "Value", "Text", opersona.idSexo);
-            // ViewBag.GrupoOptions = new SelectList(GetGrupoOptions(), "Value", "Text", opersona.idGrupo);
             ViewBag.HabitacionOptions = new SelectList(GetHabitacionOptions(), "Value", "Text", opersona.idHabitacion);
             ViewBag.RolOptions = new SelectList(GetRolOptions(), "Value", "Text", opersona.idRol);
 
             return View(opersona);
         }
+
         [HttpPost]
         public IActionResult Editar(personaModel opersona)
         {
             if (!ModelState.IsValid)
                 return View();
+
             var respuesta = _personaDatos.Editar(opersona);
             if (respuesta)
-
                 return RedirectToAction("Listar");
-            else return View();
+            else
+                return View();
         }
 
         public IActionResult Eliminar(int id)
         {
-            //metodo que devuleve la vista
+            // Método que devuelve la vista
             var opersona = _personaDatos.Obtener(id);
             return View(opersona);
         }
+
         [HttpPost]
         public IActionResult Eliminar(personaModel opersona)
         {
-
             var respuesta = _personaDatos.Eliminar(opersona.id);
             if (respuesta)
-
                 return RedirectToAction("Listar");
             else
                 return View();
