@@ -168,7 +168,7 @@ namespace AppIncalink.Datos
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("EliminarRecetas", conexion);
+                    SqlCommand cmd = new SqlCommand("EliminarReceta", conexion);
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();

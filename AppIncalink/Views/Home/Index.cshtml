@@ -4,7 +4,7 @@
 
 <div class="text-center">
     <h1 class="display-4">Sistema de Gestión </h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+   
 </div>
 
 <div class="container">
@@ -14,15 +14,15 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body"> 
-                        <a asp-action="Guardar" asp-controller="grupo" class="btn btn-success"><i class="icon ion-md-basket mr-2 lead"></i>Listado de Compras</a>
+                        <a asp-action="Listar" asp-controller="grupo" class="btn btn-success"><i class="icon ion-md-basket mr-2 lead"></i>Listado de Compras</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Calendario</h5>
-                        <p class="card-text">Contenido de la segunda columna en la primera sección.</p>
+                        
+                        <a asp-action="Calendario" asp-controller="calendario" class="btn btn-success"><i class="icon ion-md-calendar mr-2 lead"></i>Calendario</a>
                     </div>
                 </div>
             </div>
@@ -35,11 +35,9 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Reportes</h5>
-
-                        <a asp-controller="Home"
-                           asp-action="GenerarPdf"
-                           class="btn btn-info text-white">Generar PDF</a>
+                        
+                        <a asp-action="Listar" asp-controller="Menu" class="btn btn-warning"><i class="icon ion-md-pizza mr-2 lead"></i>Crear Menú</a>
+                        
                     </div>
                 </div>
             </div>

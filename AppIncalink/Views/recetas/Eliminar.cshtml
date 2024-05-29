@@ -4,12 +4,12 @@
 }
 
 <h1>Eliminar</h1>
-<form asp-action="Eliminar" asp-controller="menu" method="post">
+<form asp-action="Eliminar" asp-controller="recetas" method="post">
     <input asp-for="id" type="hidden" class="form-control">
     <!--agregando-->
 
     <div class="alert alert-danger" role="alert">
-        ¿Desea eliminar este Menu: @Html.DisplayTextFor(m => m.idMenu)?
+        ¿Desea eliminar esta Recetas: @Html.DisplayTextFor(m => m.id)?
     </div>
 
     <button type="submit" class="btn btn-danger">Eliminar</button>

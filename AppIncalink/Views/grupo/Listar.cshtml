@@ -59,7 +59,7 @@
                     <td>@item.intinerarioVuelo</td>
                     <td>@item.observaciones</td>
                     <td>
-                        <a asp-action="ListarCompras" asp-controller="grupo" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Compras</a>
+                        <a asp-action="ListarCompras" asp-controller="grupo" class="btn btn-warning" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id"><i class="icon ion-md-basket mr-2 lead"></i></a>
                     </td>
                     <td>
                         <a asp-action="ListarPersonas" asp-controller="grupo" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Detalles</a>

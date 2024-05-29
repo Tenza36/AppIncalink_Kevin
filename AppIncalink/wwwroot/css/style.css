@@ -51,3 +51,41 @@ a:hover {
     height: 100vh;
     padding-bottom: 5rem;
 }
+@media (max-width: 768px) {
+    #sidebar-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px; /* ancho del menú */
+        height: 100vh;
+        background-color: #333;
+        padding: 20px;
+        transform: translateX(-250px); /* ocultar el menú por defecto */
+        transition: transform 0.3s ease-in-out;
+    }
+
+        #sidebar-container.show {
+            transform: translateX(0); /* mostrar el menú cuando se hace clic en el botón hamburguesa */
+        }
+}
+/* Custom styles for responsive design */
+/* Custom styles for responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
+}
