@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using AppIncalink.Datos;
 using AppIncalink.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
-
+using System;
 
 namespace AppIncalink.Controllers
 {
@@ -13,11 +12,10 @@ namespace AppIncalink.Controllers
         recetasDatos _recetasDatos = new recetasDatos();
         public IActionResult Listar()
         {
-            //La vista mostrara una lista
+            // La vista mostrara una lista
             var oLista = _recetasDatos.listarNombre();
             return View(oLista);
         }
-
 
         private List<SelectListItem> GetMenuOptions()
         {
@@ -33,7 +31,6 @@ namespace AppIncalink.Controllers
                 });
             }
             return menuOptions;
-
         }
 
         private List<SelectListItem> GetProductosOptions()
@@ -75,7 +72,6 @@ namespace AppIncalink.Controllers
 
         public IActionResult Guardar(int id)
         {
-
             var recetas = _recetasDatos.Obtener(id);
 
             if (recetas == null)
@@ -92,40 +88,44 @@ namespace AppIncalink.Controllers
             ViewBag.NombreMenu = nombreMenu;
             ViewBag.NombreProductos = nombreProducto;
 
-
             return View(recetas);
         }
+
         [HttpPost]
         public IActionResult Guardar(recetasModel oRecetas)
         {
-            //Metodo recibe el obejeto para guardarlo en bd
             if (!ModelState.IsValid)
-                return View();
+            {
+                ViewBag.MenuOptions = new SelectList(GetMenuOptions(), "Value", "Text", oRecetas.idMenu);
+                ViewBag.ProductosOptions = new SelectList(GetProductosOptions(), "Value", "Text", oRecetas.idProducto);
+                return View(oRecetas);
+            }
+
+            // Verificar el valor recibido
+            Console.WriteLine($"Cantidad recibida: {oRecetas.cantidad}");
+
             var respuesta = _recetasDatos.Guardar(oRecetas);
             if (respuesta)
-
                 return RedirectToAction("Listar");
-            else return View();
-
+            else
+                return View(oRecetas);
         }
 
         public IActionResult Eliminar(int id)
         {
-            //metodo que devuleve la vista
+            // Metodo que devuelve la vista
             var omenu = _recetasDatos.Obtener(id);
             return View(omenu);
         }
+
         [HttpPost]
         public IActionResult Eliminar(menuModel omenu)
         {
-
             var respuesta = _recetasDatos.Eliminar(omenu.id);
             if (respuesta)
-
                 return RedirectToAction("Listar");
             else
                 return View();
         }
-
     }
 }
