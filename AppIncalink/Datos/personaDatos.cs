@@ -137,7 +137,7 @@ namespace AppIncalink.Datos
                     conexion.Open();
 
                     SqlCommand cmd = new SqlCommand("EditarPersona", conexion);
-                    cmd.Parameters.AddWithValue("@id", opersona.id);
+                    cmd.Parameters.AddWithValue("@idPersona", opersona.id);
                     cmd.Parameters.AddWithValue("@nombreCompleto", opersona.nombreCompleto);
                     cmd.Parameters.AddWithValue("@idSexo", opersona.idSexo);
                     cmd.Parameters.AddWithValue("@documentoId", opersona.documentoId);

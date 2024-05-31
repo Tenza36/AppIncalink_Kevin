@@ -133,7 +133,45 @@ namespace AppIncalink.Datos
             return rpta;
         }
 
+        //Metodo Editar
+        public bool Editar(actividadesModel oactividades)
+        {
+            bool rpta;
+            try
+            {
+                var cn = new Conexion();
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
 
+                    SqlCommand cmd = new SqlCommand("EditarActividad", conexion);
+                    cmd.Parameters.AddWithValue("@idActividad", oactividades.id);
+                    cmd.Parameters.AddWithValue("@nombre", oactividades.nombre);
+                    cmd.Parameters.AddWithValue("@idGrupo", oactividades.idGrupo);
+                    cmd.Parameters.AddWithValue("@fechaInicio", oactividades.fechaInicio);
+                    cmd.Parameters.AddWithValue("@fechaFin", oactividades.fechaFin);
+                    cmd.Parameters.AddWithValue("@recursos", oactividades.recursos);
+                    cmd.Parameters.AddWithValue("@responsable", oactividades.responsables);
+                    cmd.Parameters.AddWithValue("@lugarDesde", oactividades.lugarDesde);
+                    cmd.Parameters.AddWithValue("@lugarHacia", oactividades.LugarHacia);
+                    cmd.Parameters.AddWithValue("@observaciones", oactividades.observaciones);
+                    cmd.Parameters.AddWithValue("@idTipoActividad", oactividades.idTipoActividad ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@idMenu", oactividades.idMenu ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@idVehiculo", oactividades.idVehiculo ?? (object)DBNull.Value);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+
+            return rpta;
+        }
 
         //Metodo eliminar
         public bool Eliminar(int id)

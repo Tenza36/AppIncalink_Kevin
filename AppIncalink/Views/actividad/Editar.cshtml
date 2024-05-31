@@ -1,14 +1,11 @@
 ﻿@model actividadesModel
 @{
-    ViewData["Title"] = "Editar Actividad";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Editar";
 }
 
-<h3>Editar Actividad</h3>
-
-<form asp-action="Guardar" asp-controller="actividad">
+<h1>Editar</h1>
+<form asp-action="Editar" asp-controller="actividad">
     <input asp-for="id" type="hidden" class="form-control">
-
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Nombre de la Actividad</label>
@@ -18,7 +15,7 @@
         <div class="form-group col-md-6">
             <label>Grupo</label>
             <select asp-for="idGrupo" class="form-control" asp-items="ViewBag.GrupoOptions">
-                <option value="">@ViewBag.NombreGrupo</option>
+                <option value="@ViewBag.NombreGrupo">@ViewBag.NombreGrupo</option>
             </select>
         </div>
     </div>
@@ -72,26 +69,29 @@
 
     <div id="otrosSelect" class="form-group col-md-6 d-none">
         <label>Tipo de Actividad</label>
-        <select asp-for="idTipoActividad" class="form-control" asp-items="ViewBag.tipoActividadOptions">
-            <option value="">Selecciona Tipo de Actividad</option>
+        <select asp-for="idTipoActividad" class="form-control" onchange="mostrarOcultarCampos()" asp-items="ViewBag.tipoActividadOptions">
+            <option value="">Selecciona Tipo de actividad</option>
+            <option value="@ViewBag.NombreTipoActividad">@ViewBag.NombreTipoActividad</option>
         </select>
     </div>
 
     <div id="menuSelect" class="form-group col-md-6 d-none">
         <label>Menú</label>
-        <select asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
+        <select id="menuSelect" asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
             <option value="">Selecciona Menú</option>
+            <option value="@ViewBag.NombreMenu">@ViewBag.NombreMenu</option>
         </select>
     </div>
 
     <div id="vehiculoSelect" class="form-group col-md-6 d-none">
         <label>Vehículo</label>
-        <select asp-for="idVehiculo" class="form-control" asp-items="ViewBag.vehiculoOptions">
+        <select id="vehiculoSelect" asp-for="idVehiculo" class="form-control" asp-items="ViewBag.vehiculoOptions">
             <option value="">Selecciona Vehículo</option>
+            <option value="@ViewBag.NombreTransporte">@ViewBag.NombreTransporte</option>
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <button type="submit" class="btn btn-primary">Editar Actividad</button>
     <a asp-action="Listar" asp-controller="actividad" class="btn btn-warning">Volver a la Lista</a>
 </form>
 
@@ -104,18 +104,12 @@
         document.getElementById("menuSelect").classList.add("d-none");
         document.getElementById("vehiculoSelect").classList.add("d-none");
 
-        // Vaciar los otros campos cuando se selecciona uno nuevo
+        // Mostrar el select correspondiente a la opción seleccionada
         if (opcionSeleccionada === "otros") {
-            document.getElementById("menuSelect").value = "";
-            document.getElementById("vehiculoSelect").value = "";
             document.getElementById("otrosSelect").classList.remove("d-none");
         } else if (opcionSeleccionada === "menu") {
-            document.getElementById("otrosSelect").value = "";
-            document.getElementById("vehiculoSelect").value = "";
             document.getElementById("menuSelect").classList.remove("d-none");
         } else if (opcionSeleccionada === "vehiculo") {
-            document.getElementById("otrosSelect").value = "";
-            document.getElementById("menuSelect").value = "";
             document.getElementById("vehiculoSelect").classList.remove("d-none");
         }
     }

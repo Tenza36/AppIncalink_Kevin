@@ -220,6 +220,64 @@ namespace AppIncalink.Controllers
         }
 
 
+        public IActionResult Editar(int id)
+        {
+            //metodo que devuleve la vista
+            var actividad = _actividadesDatos.Obtener(id);
+
+            if (actividad == null)
+            {
+                return NotFound(); // Retornar una vista de error 404 si la actividad no se encuentra
+            }
+
+            // Obtener los nombres correspondientes a los IDs para mostrar en los SelectLists y los nombres de las tablas
+            var nombreGrupo = ObtenerNombrePorId(actividad.idGrupo, "grupo");
+            var nombreTipoActividad = ObtenerNombrePorId(actividad.idTipoActividad, "tipoActividad");
+            var nombreMenu = ObtenerNombrePorId(actividad.idMenu, "menu");
+            var nombreTransporte = ObtenerlugarPorId(actividad.idVehiculo, "vehiculo");
+
+            ViewBag.GrupoOptions = new SelectList(GetGrupoOptions(), "Value", "Text", actividad.idGrupo);
+            ViewBag.MenuOptions = new SelectList(GetMenuOptions(), "Value", "Text");
+            ViewBag.tipoActividadOptions = new SelectList(GetTipoActividadOptions(), "Value", "Text");
+            ViewBag.vehiculoOptions = new SelectList(GetVehiculoOptions(), "Value", "Text");
+            ViewBag.NombreGrupo = nombreGrupo;
+            ViewBag.NombreTipoActividad = nombreTipoActividad;
+            ViewBag.NombreMenu = nombreMenu;
+            ViewBag.NombreTransporte = nombreTransporte;
+
+
+            return View(actividad);
+        }
+        [HttpPost]
+        public IActionResult Editar(actividadesModel oActividad)
+        {
+            if (!ModelState.IsValid)
+                return View(oActividad);
+
+            // Asegúrate de limpiar los campos no seleccionados
+            if (oActividad.idTipoActividad.HasValue)
+            {
+                oActividad.idMenu = null;
+                oActividad.idVehiculo = null;
+            }
+            else if (oActividad.idMenu.HasValue)
+            {
+                oActividad.idTipoActividad = null;
+                oActividad.idVehiculo = null;
+            }
+            else if (oActividad.idVehiculo.HasValue)
+            {
+                oActividad.idTipoActividad = null;
+                oActividad.idMenu = null;
+            }
+
+            var respuesta = _actividadesDatos.Editar(oActividad);
+            if (respuesta)
+                return RedirectToAction("Listar");
+            else
+                return View(oActividad);
+        }
+
 
         public IActionResult Eliminar(int id)
         {
