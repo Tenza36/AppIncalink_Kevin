@@ -1,91 +1,40 @@
-﻿:root {
-    --primary: #111B54;
-    --light: #ffffff;
-    --grey: #efefef;
-}
-
-body {
-    overflow: hidden;
-    font-weight: 300;
-    color: var(--primary);
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-.bg-primary {
-    background-color: var(--primary) !important;
-}
-
-.bg-light {
-    background-color: var(--light) !important;
-}
-
-.btn {
-    border: 0;
-}
-
-.btn-primary {
-    background-color: var(--primary);
-}
-
-#sidebar-container {
-    min-height: 100vh;
-}
-
-#sidebar-container {
-    padding: .875rem 1.25rem;
-}
-
-    #sidebar-container .menu {
-        width: 18rem;
-    }
-
-.btn-search {
-    right: 5px;
-}
-
-#content {
-    overflow-y: auto;
-    height: 100vh;
-    padding-bottom: 5rem;
-}
-@media (max-width: 768px) {
-    #sidebar-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 250px; /* ancho del menú */
-        height: 100vh;
-        background-color: #333;
-        padding: 20px;
-        transform: translateX(-250px); /* ocultar el menú por defecto */
-        transition: transform 0.3s ease-in-out;
-    }
-
-        #sidebar-container.show {
-            transform: translateX(0); /* mostrar el menú cuando se hace clic en el botón hamburguesa */
+﻿ .sidebar {
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #001d4a;
+            padding-top: 20px;
+            color: white;
         }
-}
-/* Custom styles for responsive design */
-/* Custom styles for responsive design */
-@media (max-width: 768px) {
-    .navbar {
-        display: none;
-    }
-
-    .menu {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-}
-
-@media (min-width: 769px) {
-    .menu-toggle {
-        display: none;
-    }
-}
+        .sidebar a {
+            padding: 15px 10px;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #001d4a;
+            color: white;
+            border: none;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .sidebar.show {
+            display: block;
+        }
