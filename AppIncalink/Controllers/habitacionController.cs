@@ -1,9 +1,11 @@
 ﻿using AppIncalink.Datos;
 using AppIncalink.Models;
+using AppIncalink.Permisos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppIncalink.Controllers
 {
+    [ValidarSesion]
     public class habitacionController : Controller
     {
         habitacionDatos _habitacionDatos = new habitacionDatos();

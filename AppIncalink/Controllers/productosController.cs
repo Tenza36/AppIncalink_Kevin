@@ -1,11 +1,13 @@
 ﻿using AppIncalink.Datos;
 using AppIncalink.Models;
+using AppIncalink.Permisos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
 
 namespace AppIncalink.Controllers
 {
+    [ValidarSesion]
     public class productosController : Controller
     {
         productosDatos _productosDatos = new productosDatos();

@@ -4,9 +4,11 @@ using AppIncalink.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
 using System;
+using AppIncalink.Permisos;
 
 namespace AppIncalink.Controllers
 {
+    [ValidarSesion]
     public class recetasController : Controller
     {
         recetasDatos _recetasDatos = new recetasDatos();

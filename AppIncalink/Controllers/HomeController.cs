@@ -5,9 +5,11 @@ using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using QuestPDF.Fluent;
+using AppIncalink.Permisos;
 
 namespace AppIncalink.Controllers
 {
+    [ValidarSesion] // Atributo aplicado a nivel de clase
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -65,7 +67,6 @@ namespace AppIncalink.Controllers
             };
         }
 
-
         public IActionResult Privacy()
         {
             return View();
@@ -76,5 +77,11 @@ namespace AppIncalink.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Remove("usuario");
+            return RedirectToAction("Login", "Acceso");
+        }
+
     }
 }

@@ -3,11 +3,14 @@ using AppIncalink.Datos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
+using AppIncalink.Permisos;
 
 namespace AppIncalink.Controllers
 {
+    [ValidarSesion]
     public class actividadController : Controller
     {
+        
         private readonly actividadesDatos _actividadesDatos;
         
         public actividadController(IWebHostEnvironment env)
