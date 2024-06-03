@@ -36,7 +36,7 @@
 
                     <th scope="col">Nombre del Producto</th>
                     <th scope="col">Tipo de Medida</th>
-                    <th>Editar</th>
+                
                     <th>Eliminar</th>
                 </tr>
             </thead>
@@ -46,9 +46,7 @@
                     <tr>
                         <td>@item.nombre </td>
                         <td>@item.tipoMedida</td>
-                        <td>
-                            <a asp-action="Editar" asp-controller="productos" class="btn btn-primary btn-sm" asp-route-id="@item.id">Editar</a>
-                        </td>
+                        
                         <td>
                             <a asp-action="Eliminar" asp-controller="productos" class="btn btn-danger btn-sm" asp-route-id="@item.id">Eliminar</a>
                         </td>

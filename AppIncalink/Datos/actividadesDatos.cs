@@ -220,7 +220,7 @@ namespace AppIncalink.Datos
         {
             var pdfStream = new MemoryStream();
             // Obtener la ruta absoluta de la imagen
-            var imagePath = Path.Combine(_env.WebRootPath, "img", "Inca-Link-Ecuador_SQ_White-1.png");
+            var imagePath = Path.Combine(_env.WebRootPath, "img", "LogoInkalinkTransparente.png");
             byte[] imageData = File.ReadAllBytes(imagePath);
 
             Document.Create(container =>
