@@ -2,9 +2,9 @@
 using AppIncalink.Datos;
 using AppIncalink.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data.SqlClient;
-using System;
+using System.Globalization;
 using AppIncalink.Permisos;
+using System.Data.SqlClient;
 
 namespace AppIncalink.Controllers
 {
@@ -12,9 +12,9 @@ namespace AppIncalink.Controllers
     public class recetasController : Controller
     {
         recetasDatos _recetasDatos = new recetasDatos();
+
         public IActionResult Listar()
         {
-            // La vista mostrara una lista
             var oLista = _recetasDatos.listarNombre();
             return View(oLista);
         }
@@ -81,7 +81,6 @@ namespace AppIncalink.Controllers
                 return NotFound(); // Retornar una vista de error 404 si la persona no se encuentra
             }
 
-            // Obtener los nombres correspondientes a los IDs para mostrar en los SelectLists
             var nombreMenu = ObtenerNombrePorId(recetas.idMenu, "menu");
             var nombreProducto = ObtenerNombrePorId(recetas.idProducto, "productos");
 
@@ -103,9 +102,6 @@ namespace AppIncalink.Controllers
                 return View(oRecetas);
             }
 
-            // Verificar el valor recibido
-            Console.WriteLine($"Cantidad recibida: {oRecetas.cantidad}");
-
             var respuesta = _recetasDatos.Guardar(oRecetas);
             if (respuesta)
                 return RedirectToAction("Listar");
@@ -115,7 +111,6 @@ namespace AppIncalink.Controllers
 
         public IActionResult Eliminar(int id)
         {
-            // Metodo que devuelve la vista
             var omenu = _recetasDatos.Obtener(id);
             return View(omenu);
         }

@@ -3,6 +3,7 @@ using AppIncalink.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AppIncalink.Datos
 {
@@ -106,7 +107,7 @@ namespace AppIncalink.Datos
                     SqlCommand cmd = new SqlCommand("InsertarRecetas", conexion);
                     cmd.Parameters.AddWithValue("@idMenu", orecetas.idMenu);
                     cmd.Parameters.AddWithValue("@idProducto", orecetas.idProducto);
-                    cmd.Parameters.Add("@cantidad", SqlDbType.Decimal).Value = orecetas.cantidad;
+                    cmd.Parameters.AddWithValue("@cantidad", orecetas.cantidad);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();
