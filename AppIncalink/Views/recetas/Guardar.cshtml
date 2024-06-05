@@ -29,7 +29,7 @@
             <div class="form-group col-md-6">
                 <label>Cantidad</label>
                 <!-- Cambié el tipo de input a "number" y eliminé el atributo "step" -->
-                <input type="number" class="form-control" name="cantidad" value="@Model.cantidad" min="0.01">
+                <input type="number" asp-for="cantidad" class="form-control" name="cantidad" step="0.01">
             </div>
         </div>
     </div>
@@ -37,14 +37,3 @@
     <button type="submit" class="btn btn-success">Guardar Receta</button>
 </form>
 
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#recetaForm').on('submit', function () {
-                // No es necesario realizar ningún cambio en los valores de cantidad
-                // antes de enviar el formulario
-            });
-        });
-    </script>
-}

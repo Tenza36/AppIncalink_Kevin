@@ -16,6 +16,7 @@
         <label>Tipo de Medida</label>
         <select asp-for="tipoMedida" class="form-control">
             <option value="">Seleccionar...</option>
+            <option value="Litro">Litro</option>
             <option value="Gramo">Gramo</option>
             <option value="Kilogramo">Kilogramo</option>
             <option value="Libra">Libra</option>
@@ -27,6 +28,6 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Agregar Menu</button>
+    <button type="submit" class="btn btn-primary">Agregar Producto</button>
     <a asp-action="Listar" asp-controller="menu" class="btn btn-warning">Volver a la Lista</a>
 </form>
