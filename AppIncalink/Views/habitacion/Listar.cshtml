@@ -7,7 +7,6 @@
 <br />
 <section>
     <div class="container">
-
         <div class="row">
             <div class="col">
                 <td>
@@ -35,7 +34,6 @@
         <table class="table">
             <thead>
                 <tr>
-
                     <th scope="col">Numero Habitación</th>
                     <th scope="col">Numero de Camas</th>
                     <th>Editar</th>
@@ -45,7 +43,8 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    var colorClase = item.Personas.Count >= item.numCamas ? "ocupada" : "disponible";
+                    <tr class="@colorClase">
                         <td>@item.id </td>
                         <td>@item.numCamas</td>
                         <td>
@@ -54,14 +53,20 @@
                         <td>
                             <a asp-action="Eliminar" asp-controller="habitacion" class="btn btn-danger btn-sm" asp-route-id="@item.id">Eliminar</a>
                         </td>
-                        <td></td>
                     </tr>
                 }
             </tbody>
         </table>
-
-
     </div>
-
 </section>
 
+<style>
+    .ocupada {
+        background-color: red;
+        color: white;
+    }
+    .disponible {
+        background-color: green;
+        color: white;
+    }
+</style>

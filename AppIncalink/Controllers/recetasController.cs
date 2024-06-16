@@ -2,7 +2,6 @@
 using AppIncalink.Datos;
 using AppIncalink.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Globalization;
 using AppIncalink.Permisos;
 using System.Data.SqlClient;
 
@@ -19,20 +18,20 @@ namespace AppIncalink.Controllers
             return View(oLista);
         }
 
-        private List<SelectListItem> GetMenuOptions()
+        private List<SelectListItem> GetPlatoOptions()
         {
-            var menuDatos = new menuDatos();
-            var menus = menuDatos.listar();
-            var menuOptions = new List<SelectListItem>();
-            foreach (var menu in menus)
+            var platoDatos = new platosDatos();
+            var platos = platoDatos.listar();
+            var platoOptions = new List<SelectListItem>();
+            foreach (var plato in platos)
             {
-                menuOptions.Add(new SelectListItem
+                platoOptions.Add(new SelectListItem
                 {
-                    Text = menu.nombre,
-                    Value = menu.id.ToString()
+                    Text = plato.nombre,
+                    Value = plato.id.ToString()
                 });
             }
-            return menuOptions;
+            return platoOptions;
         }
 
         private List<SelectListItem> GetProductosOptions()
@@ -81,11 +80,11 @@ namespace AppIncalink.Controllers
                 return NotFound(); // Retornar una vista de error 404 si la persona no se encuentra
             }
 
-            var nombreMenu = ObtenerNombrePorId(recetas.idMenu, "menu");
+            var nombreMenu = ObtenerNombrePorId(recetas.idPlato, "platos");
             var nombreProducto = ObtenerNombrePorId(recetas.idProducto, "productos");
 
-            ViewBag.MenuOptions = new SelectList(GetMenuOptions(), "Value", "Text", recetas.idMenu);
-            ViewBag.ProductosOptions = new SelectList(GetProductosOptions(), "Value", "Text", recetas.idMenu);
+            ViewBag.MenuOptions = new SelectList(GetPlatoOptions(), "Value", "Text", recetas.idPlato);
+            ViewBag.ProductosOptions = new SelectList(GetProductosOptions(), "Value", "Text", recetas.idPlato);
             ViewBag.NombreMenu = nombreMenu;
             ViewBag.NombreProductos = nombreProducto;
 
@@ -97,7 +96,7 @@ namespace AppIncalink.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.MenuOptions = new SelectList(GetMenuOptions(), "Value", "Text", oRecetas.idMenu);
+                ViewBag.MenuOptions = new SelectList(GetPlatoOptions(), "Value", "Text", oRecetas.idPlato);
                 ViewBag.ProductosOptions = new SelectList(GetProductosOptions(), "Value", "Text", oRecetas.idProducto);
                 return View(oRecetas);
             }

@@ -1,0 +1,29 @@
+﻿@model List<platosPorMenu>
+@{
+    ViewData["Title"] = "ListarPlatos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ListarPlatos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>Nombre del Plato</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var receta in Model)
+        {
+            <tr>
+
+                <td>@receta.nombrePlato</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+

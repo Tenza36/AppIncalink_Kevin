@@ -27,7 +27,7 @@ namespace AppIncalink.Datos
                         oLista.Add(new recetasModel()
                         {
                             id = Convert.ToInt32(dr["id"]),
-                            idMenu = Convert.ToInt32(dr["idMenu"]),
+                            idPlato = Convert.ToInt32(dr["idPlato"]),
                             idProducto = Convert.ToInt32(dr["idProducto"]),
                             cantidad = Convert.ToDecimal(dr["cantidad"])
                         });
@@ -55,7 +55,7 @@ namespace AppIncalink.Datos
                         oLista.Add(new recetasPorMenu()
                         {
                             id = Convert.ToInt32(dr["id"]),
-                            nombreMenu = dr["nombreMenu"].ToString(),
+                            nombrePlato = dr["nombrePlato"].ToString(),
                             nombreProducto = dr["nombreProducto"].ToString(),
                             cantidad = Convert.ToDecimal(dr["cantidad"])
                         });
@@ -84,7 +84,7 @@ namespace AppIncalink.Datos
                     while (dr.Read())
                     {
                         orecetas.id = Convert.ToInt32(dr["id"]);
-                        orecetas.idMenu = Convert.ToInt32(dr["idMenu"]);
+                        orecetas.idPlato = Convert.ToInt32(dr["idPlato"]);
                         orecetas.idProducto = Convert.ToInt32(dr["idProducto"]);
                         orecetas.cantidad = Convert.ToDecimal(dr["cantidad"]);
                     }
@@ -105,7 +105,7 @@ namespace AppIncalink.Datos
                     conexion.Open();
 
                     SqlCommand cmd = new SqlCommand("InsertarRecetas", conexion);
-                    cmd.Parameters.AddWithValue("@idMenu", orecetas.idMenu);
+                    cmd.Parameters.AddWithValue("@idPlato", orecetas.idPlato);
                     cmd.Parameters.AddWithValue("@idProducto", orecetas.idProducto);
                     cmd.Parameters.AddWithValue("@cantidad", orecetas.cantidad);
                     cmd.CommandType = CommandType.StoredProcedure;

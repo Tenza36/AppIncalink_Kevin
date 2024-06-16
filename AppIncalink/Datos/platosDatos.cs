@@ -3,27 +3,27 @@ using System.Data;
 using System.Data.SqlClient;
 namespace AppIncalink.Datos
 {
-    public class menuDatos
+    public class platosDatos
     {
-        //Metodo Listar
-        public List<menuModel> listar()
+        public List<platonombreModel> listar()
         {
-            var oLista = new List<menuModel>();
+            var oLista = new List<platonombreModel>();
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
 
-                SqlCommand cmd = new SqlCommand("ListarMenu", conexion);
+                SqlCommand cmd = new SqlCommand("ListarPlatosNombre", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        oLista.Add(new menuModel()
+                        oLista.Add(new platonombreModel()
                         {
                             id = Convert.ToInt32(dr["id"]),
-                            nombre = dr["nombre"].ToString(),                       
+                            nombre = dr["nombre"].ToString(),
+                            nombreMenu = dr["nombreMenu"].ToString()
                         });
                     }
                 }
@@ -32,34 +32,34 @@ namespace AppIncalink.Datos
             return oLista;
         }
 
-        public menuModel Obtener(int id)
+        public platosModel Obtener(int id)
         {
-            var omenu = new menuModel();
+            var oplatos = new platosModel();
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
 
-                SqlCommand cmd = new SqlCommand("ObtenerMenu", conexion);
-                cmd.Parameters.AddWithValue("idMenu", id);
+                SqlCommand cmd = new SqlCommand("ObtenerPlato", conexion);
+                cmd.Parameters.AddWithValue("idPlatos", id);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
                 {
 
                     while (dr.Read())
                     {
-                        omenu.id = Convert.ToInt32(dr["id"]);
-                        omenu.nombre = dr["nombre"].ToString();
+                        oplatos.id = Convert.ToInt32(dr["id"]);
+                        oplatos.nombre = dr["nombre"].ToString();
+                        oplatos.idMenu = Convert.ToInt32(dr["idMenu"]);
 
                     }
                 }
             }
 
-            return omenu;
+            return oplatos;
         }
-
         //Metodo de guardar 
-        public bool Guardar(menuModel omenu)
+        public bool Guardar(platosModel oplatos)
         {
             bool rpta;
             try
@@ -69,8 +69,9 @@ namespace AppIncalink.Datos
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("InsertarMenu", conexion);
-                    cmd.Parameters.AddWithValue("@Nombre", omenu.nombre);
+                    SqlCommand cmd = new SqlCommand("InsertarPlato", conexion);
+                    cmd.Parameters.AddWithValue("@Nombre", oplatos.nombre);
+                    cmd.Parameters.AddWithValue("@idMenu", oplatos.idMenu);
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -89,7 +90,7 @@ namespace AppIncalink.Datos
         }
 
         //Metodo editar 
-        public bool Editar(menuModel omenu)
+        public bool Editar(platosModel oplatos)
         {
             bool rpta;
             try
@@ -100,9 +101,10 @@ namespace AppIncalink.Datos
                     conexion.Open();
 
 
-                    SqlCommand cmd = new SqlCommand("EditarMenu", conexion);
-                    cmd.Parameters.AddWithValue("@id", omenu.id); 
-                    cmd.Parameters.AddWithValue("@nombre", omenu.nombre); 
+                    SqlCommand cmd = new SqlCommand("EditarPlato", conexion);
+                    cmd.Parameters.AddWithValue("@id", oplatos.id); 
+                    cmd.Parameters.AddWithValue("@nombre", oplatos.nombre);
+                    cmd.Parameters.AddWithValue("@idMenu", oplatos.idMenu);
                     cmd.CommandType = CommandType.StoredProcedure;
 
 
@@ -131,7 +133,7 @@ namespace AppIncalink.Datos
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("EliminarMenu", conexion);
+                    SqlCommand cmd = new SqlCommand("EliminarPlato", conexion);
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
@@ -148,28 +150,29 @@ namespace AppIncalink.Datos
 
         }
 
-        public List<platosPorMenu> ListarPlatos(int idMenu)
+        public List<recetasPorMenu> ListarRecetas(int idMenu) //recetas por plato 
         {
-            var lista = new List<platosPorMenu>();
+            var lista = new List<recetasPorMenu>();
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("ListarRecetasPorMenu", conexion);
+                SqlCommand cmd = new SqlCommand("ListarRecetasPorPlato", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idMenu", idMenu);
                 using (var dr = cmd.ExecuteReader())
-                {               
-                        while (dr.Read())
+                {
+                    while (dr.Read())
+                    {
+                        lista.Add(new recetasPorMenu()
                         {
-                            lista.Add(new platosPorMenu()
-                            {
-                                id = Convert.ToInt32(dr["id"]),
-                                nombrePlato = dr["nombrePlato"].ToString()
-                                
-                            });
-                        }
-                    
+                            id = Convert.ToInt32(dr["id"]),
+                            nombrePlato = dr["nombrePlato"].ToString(),
+                            nombreProducto = dr["nombreProducto"].ToString(),
+                            cantidad = Convert.ToDecimal(dr["cantidad"])
+                        });
+                    }
+
                 }
             }
 

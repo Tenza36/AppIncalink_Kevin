@@ -10,8 +10,8 @@
     <div id="productosContainer">
         <!-- Aquí se agregarán dinámicamente los campos de productos y cantidades -->
         <div class="form-group">
-            <label>Menu</label>
-            <select asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
+            <label>Platos</label>
+            <select asp-for="idPlato" class="form-control" asp-items="ViewBag.MenuOptions">
                 <option value="@ViewBag.NombreMenu">@ViewBag.NombreMenu</option>
             </select>
         </div>

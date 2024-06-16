@@ -1,0 +1,30 @@
+﻿@model platosModel
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="d-flex justify-content-center">Guardar Plato</h1>
+<form asp-action="Guardar" asp-controller="plato" method="post" id="recetaForm">
+
+    <div id="productosContainer">
+        <!-- Aquí se agregarán dinámicamente los campos de productos y cantidades -->
+        <div class="form-group">
+            <label>Menu</label>
+            <select asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
+                <option value="@ViewBag.NombreMenu">@ViewBag.NombreMenu</option>
+            </select>
+        </div>
+    
+            
+            <div class="form-group">
+                <label>Cantidad</label>
+                <!-- Cambié el tipo de input a "number" y eliminé el atributo "step" -->
+                <input type="text" asp-for="nombre" class="form-control" name="nombre">
+            </div>
+        
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar Plato</button>
+</form>
+

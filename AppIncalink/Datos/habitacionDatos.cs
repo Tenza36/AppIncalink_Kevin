@@ -168,5 +168,48 @@ namespace AppIncalink.Datos
             return rpta;
 
         }
-    }
+
+
+        public List<nhabitacionModel> ObtenerHabitacionesOcupadas()
+        {
+            var habitacionesOcupadas = new List<nhabitacionModel>();
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+
+                string query = @"SELECT h.id, h.numCamas, COUNT(p.id) AS NumPersonasAsignadas 
+                                 FROM habitacion h 
+                                 LEFT JOIN persona p ON h.id = p.idHabitacion 
+                                 GROUP BY h.id, h.numCamas
+                                 HAVING COUNT(p.id) > 0";
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var habitacion = new nhabitacionModel
+                        {
+                            id = Convert.ToInt32(dr["id"]),
+                            numCamas = Convert.ToInt32(dr["numCamas"]),
+                            Personas = new List<personaModel>()
+                        };
+
+                        int numPersonasAsignadas = Convert.ToInt32(dr["NumPersonasAsignadas"]);
+
+                        for (int i = 0; i < numPersonasAsignadas; i++)
+                        {
+                            habitacion.Personas.Add(new personaModel());
+                        }
+
+                        habitacionesOcupadas.Add(habitacion);
+                    }
+                }
+            }
+
+            return habitacionesOcupadas;
+        }
+    
+}
 }
