@@ -5,10 +5,10 @@
 }
 
 <h3 class="d-flex justify-content-center">Guardar Actividad</h3>
-
 <form asp-action="Guardar" asp-controller="actividad">
     <input asp-for="id" type="hidden" class="form-control">
-
+    php
+    Copiar código
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Nombre de la Actividad</label>
@@ -94,7 +94,6 @@
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     <a asp-action="Listar" asp-controller="actividad" class="btn btn-warning">Volver a la Lista</a>
 </form>
-
 <script>
 
     function mostrarOcultarCampos() {

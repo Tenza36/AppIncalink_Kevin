@@ -155,25 +155,23 @@ namespace AppIncalink.Datos
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("ListarRecetasPorMenu", conexion);
+                SqlCommand cmd = new SqlCommand("ListarPlatosPorMenu", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idMenu", idMenu);
                 using (var dr = cmd.ExecuteReader())
-                {               
-                        while (dr.Read())
+                {
+                    while (dr.Read())
+                    {
+                        lista.Add(new platosPorMenu()
                         {
-                            lista.Add(new platosPorMenu()
-                            {
-                                id = Convert.ToInt32(dr["id"]),
-                                nombrePlato = dr["nombrePlato"].ToString()
-                                
-                            });
-                        }
-                    
+                            id = Convert.ToInt32(dr["id"]),
+                            nombrePlato = dr["nombrePlato"].ToString()
+                        });
+                    }
                 }
             }
-
             return lista;
         }
+
     }
 }

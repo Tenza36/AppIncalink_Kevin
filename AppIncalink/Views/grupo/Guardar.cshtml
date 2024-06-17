@@ -6,42 +6,40 @@
 
 <h1 class="d-flex justify-content-center">Guardar Grupo</h1>
 
-
 <form asp-action="Guardar" asp-controller="grupo">
     <div class="form-group">
         <label>Nombre del Grupo</label>
-        <input asp-for="nombre" type="text" class="form-control">
+        <input asp-for="nombre" type="text" class="form-control" required>
         <span asp-validation-for="nombre" class="text-danger"></span>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>Fecha LLegada</label>
-            <input asp-for="fechaLlegada" type="datetime-local" class="form-control">
+            <label>Fecha Llegada</label>
+            <input asp-for="fechaLlegada" type="datetime-local" class="form-control" required>
             <span asp-validation-for="fechaLlegada" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Fecha Final</label>
-            <input asp-for="fechaSalida" type="datetime-local" class="form-control">
-            <span asp-validation-for="fechaLlegada" class="text-danger"></span>
+            <input asp-for="fechaSalida" type="datetime-local" class="form-control" required>
+            <span asp-validation-for="fechaSalida" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
-        <label>Información del Vuelo de llegada</label>
-        <textarea asp-for="informacionVuelo" class="form-control" rows="3"></textarea>
-        <span asp-validation-for="fechaLlegada" class="text-danger"></span>
+        <label>Información del Vuelo de Llegada</label>
+        <textarea asp-for="informacionVuelo" class="form-control" rows="3" required></textarea>
+        <span asp-validation-for="informacionVuelo" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Itinerario del Vuelo de Salida</label>
-        <textarea asp-for="intinerarioVuelo" class="form-control" rows="3"></textarea>
-        <span asp-validation-for="fechaLlegada" class="text-danger"></span>
+        <textarea asp-for="intinerarioVuelo" class="form-control" rows="3" required></textarea>
+        <span asp-validation-for="intinerarioVuelo" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Observaciones del Grupo</label>
-        <textarea asp-for="observaciones" class="form-control"></textarea>
+        <textarea asp-for="observaciones" class="form-control" required></textarea>
+        <span asp-validation-for="observaciones" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Agregar Grupo</button>
     <a asp-action="Listar" asp-controller="grupo" class="btn btn-warning">Volver a la Lista</a>
 </form>
-
-

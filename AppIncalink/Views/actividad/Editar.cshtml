@@ -6,89 +6,101 @@
 <h1 class="d-flex justify-content-center">Editar Actividad</h1>
 <form asp-action="Editar" asp-controller="actividad">
     <input asp-for="id" type="hidden" class="form-control">
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Nombre de la Actividad</label>
-            <input asp-for="nombre" type="text" class="form-control">
+            <input asp-for="nombre" type="text" class="form-control" required>
             <span asp-validation-for="nombre" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Grupo</label>
-            <select asp-for="idGrupo" class="form-control" asp-items="ViewBag.GrupoOptions">
-                <option value="@ViewBag.NombreGrupo">@ViewBag.NombreGrupo</option>
+            <select asp-for="idGrupo" class="form-control" asp-items="ViewBag.GrupoOptions" required>
+                <option value="">Selecciona un grupo</option>
             </select>
+            <span asp-validation-for="idGrupo" class="text-danger"></span>
         </div>
     </div>
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Fecha de Inicio</label>
-            <input asp-for="fechaInicio" type="datetime-local" class="form-control">
+            <input asp-for="fechaInicio" type="datetime-local" class="form-control" required>
             <span asp-validation-for="fechaInicio" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Fecha Final</label>
-            <input asp-for="fechaFin" type="datetime-local" class="form-control">
+            <input asp-for="fechaFin" type="datetime-local" class="form-control" required>
             <span asp-validation-for="fechaFin" class="text-danger"></span>
         </div>
     </div>
+
     <div class="form-group">
         <label>Recursos</label>
-        <textarea asp-for="recursos" class="form-control" rows="3"></textarea>
+        <textarea asp-for="recursos" class="form-control" rows="3" required></textarea>
         <span asp-validation-for="recursos" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label>Responsable</label>
-        <textarea asp-for="responsables" class="form-control" rows="3"></textarea>
+        <textarea asp-for="responsables" class="form-control" rows="3" required></textarea>
         <span asp-validation-for="responsables" class="text-danger"></span>
     </div>
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Lugar Desde</label>
-            <textarea asp-for="lugarDesde" class="form-control"></textarea>
+            <textarea asp-for="lugarDesde" class="form-control" required></textarea>
+            <span asp-validation-for="lugarDesde" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Lugar Hacia</label>
-            <textarea asp-for="LugarHacia" class="form-control"></textarea>
+            <textarea asp-for="LugarHacia" class="form-control" required></textarea>
+            <span asp-validation-for="LugarHacia" class="text-danger"></span>
         </div>
     </div>
+
     <div class="form-group">
         <label>Observaciones</label>
-        <textarea asp-for="observaciones" class="form-control"></textarea>
+        <textarea asp-for="observaciones" class="form-control" required></textarea>
+        <span asp-validation-for="observaciones" class="text-danger"></span>
     </div>
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Selecciona una opción</label>
-            <select id="selectOpciones" class="form-control" onchange="mostrarOcultarCampos()">
+            <select id="selectOpciones" class="form-control" onchange="mostrarOcultarCampos()" required>
                 <option value="">Selecciona una opción</option>
                 <option value="otros">Otros</option>
                 <option value="menu">Menú</option>
                 <option value="vehiculo">Vehículo</option>
             </select>
+           
         </div>
     </div>
 
     <div id="otrosSelect" class="form-group col-md-6 d-none">
         <label>Tipo de Actividad</label>
-        <select asp-for="idTipoActividad" class="form-control" onchange="mostrarOcultarCampos()" asp-items="ViewBag.tipoActividadOptions">
-            <option value="">Selecciona Tipo de actividad</option>
-            <option value="@ViewBag.NombreTipoActividad">@ViewBag.NombreTipoActividad</option>
+        <select asp-for="idTipoActividad" class="form-control" asp-items="ViewBag.tipoActividadOptions">
+            <option value="">Selecciona Tipo de Actividad</option>
         </select>
+        <span asp-validation-for="idTipoActividad" class="text-danger"></span>
     </div>
 
     <div id="menuSelect" class="form-group col-md-6 d-none">
         <label>Menú</label>
-        <select id="menuSelect" asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
+        <select asp-for="idMenu" class="form-control" asp-items="ViewBag.MenuOptions">
             <option value="">Selecciona Menú</option>
-            <option value="@ViewBag.NombreMenu">@ViewBag.NombreMenu</option>
         </select>
+        <span asp-validation-for="idMenu" class="text-danger"></span>
     </div>
 
     <div id="vehiculoSelect" class="form-group col-md-6 d-none">
         <label>Vehículo</label>
-        <select id="vehiculoSelect" asp-for="idVehiculo" class="form-control" asp-items="ViewBag.vehiculoOptions">
+        <select asp-for="idVehiculo" class="form-control" asp-items="ViewBag.vehiculoOptions">
             <option value="">Selecciona Vehículo</option>
-            <option value="@ViewBag.NombreTransporte">@ViewBag.NombreTransporte</option>
         </select>
+        <span asp-validation-for="idVehiculo" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Editar Actividad</button>
