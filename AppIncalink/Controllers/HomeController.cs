@@ -66,6 +66,18 @@ namespace AppIncalink.Controllers
                 FileDownloadName = "Compras.pdf"
             };
         }
+        public IActionResult GenerarMenuPdf(int idGrupo)
+        {
+            var actividades = _reporteDatos.ObtenerMenusPorGrupo(idGrupo);
+            var pdfStream = _reporteDatos.GenerateMenuPdf(actividades);
+
+            return new FileStreamResult(pdfStream, "application/pdf")
+            {
+                FileDownloadName = "Menus_" + idGrupo.ToString() + ".pdf" // Nombre del archivo basado en el ID del grupo
+            };
+        }
+
+
 
         public IActionResult Privacy()
         {
@@ -84,4 +96,5 @@ namespace AppIncalink.Controllers
         }
 
     }
+
 }

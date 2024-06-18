@@ -104,6 +104,28 @@ namespace AppIncalink.Controllers
                 return View();
         }
 
+        public IActionResult ListarMenus(int idGrupo)
+        {
+            var Menus = _grupoDatos.ObtenerMenusPorGrupo(idGrupo);
+            var viewModel = new MenusViewModel
+            {
+                Id = idGrupo,
+                Menus = Menus
+            };
+            return View(viewModel);
+        }
+
+        public IActionResult ListarVehiculo(int idGrupo) 
+        {
+            var Lugares = _grupoDatos.ObtenerVehiculoPorGrupo(idGrupo);
+            var viewModel = new VehiculoViewModel
+            {
+                Id = idGrupo,
+                Lugares = Lugares
+            };
+            return View(viewModel);
+        }
+
 
     }
 

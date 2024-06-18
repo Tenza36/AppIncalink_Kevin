@@ -7,7 +7,6 @@
 <br />
 <section>
     <div class="container">
-
         <div class="row">
             <div class="col">
                 <td>
@@ -30,22 +29,17 @@
 
 <br />
 
-
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha de Llegada</th>
                 <th scope="col">Fecha de Salida</th>
                 <th scope="col">Informacion del Vuelo</th>
                 <th scope="col">Itinerario del Vuelo</th>
                 <th scope="col">Observaciones</th>
-                <th>Ver Compras</th>
-                <th>Ver Detalles</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -59,24 +53,16 @@
                     <td>@item.intinerarioVuelo</td>
                     <td>@item.observaciones</td>
                     <td>
-                        <a asp-action="ListarCompras" asp-controller="grupo" class="btn btn-warning" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id"><i class="icon ion-md-basket mr-2 lead"></i></a>
+                        <a asp-action="Editar" asp-route-id="@item.id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Eliminar" asp-route-id="@item.id" class="btn btn-danger">Eliminar</a>
+                        <a asp-action="ListarPersonas" asp-route-idGrupo="@item.id" class="btn btn-warning">Ver Personas</a>
+                        <a asp-action="ListarCompras" asp-route-idGrupo="@item.id" class="btn btn-secondary">Ver Compras</a>
+                        <a asp-action="ListarMenus" asp-route-idGrupo="@item.id" class="btn btn-info">Ver Menús</a>
+                        <a asp-action="ListarTiposActividad" asp-route-idGrupo="@item.id" class="btn btn-success">Ver Tipos de Actividad</a>
+                        <a asp-action="ListarVehiculo" asp-route-idGrupo="@item.id" class="btn btn-dark">Ver Vehículos</a>
                     </td>
-                    <td>
-                        <a asp-action="ListarPersonas" asp-controller="grupo" asp-route-idGrupo="@item.id" asp-route-idPersona="@item.id">Ver Detalles</a>
-                    </td>
-                    <td>
-                        <a asp-action="Editar" asp-controller="grupo" class="btn btn-primary btn-sm" asp-route-id="@item.id">Editar</a>
-                    </td>
-                    <td>
-                        <a asp-action="Eliminar" asp-controller="grupo" class="btn btn-danger btn-sm" asp-route-id="@item.id">Eliminar</a>
-                    </td>
-                    <td></td>
                 </tr>
             }
         </tbody>
     </table>
-
-
 </div>
-
-

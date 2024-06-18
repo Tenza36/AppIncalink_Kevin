@@ -237,9 +237,77 @@ namespace AppIncalink.Datos
             return oLista;
         }
 
-       
 
 
+        //Obtner menus por grupo
+        public List<MenuPorGrupoModel> ObtenerMenusPorGrupo(int idGrupo)
+        {
+            var oLista = new List<MenuPorGrupoModel>();
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ObtenerMenusPorGrupo", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        oLista.Add(new MenuPorGrupoModel()
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Nombre = dr["nombre"].ToString(),
+                            NombreGrupo = dr["nombreGrupo"].ToString(),
+                            FechaInicio = Convert.ToDateTime(dr["fechaInicio"]),
+                            FechaFin = Convert.ToDateTime(dr["fechaFin"]),
+                            Recursos = dr["recursos"].ToString(),
+                            Responsables = dr["responsable"].ToString(),
+                            LugarDesde = dr["lugarDesde"].ToString(),
+                            LugarHacia = dr["lugarHacia"].ToString(),
+                            Observaciones = dr["observaciones"].ToString(),
+                            NombreMenu = dr["nombreMenu"].ToString()
+                        });
+                    }
+                }
+            }
+            return oLista;
+        }
+
+        //Obtener vehiculo por grupo
+        public List<MenuPorVehiculoModel> ObtenerVehiculoPorGrupo(int idGrupo)
+        {
+            var oLista = new List<MenuPorVehiculoModel>();
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ObtenerVehiculoPorGrupo", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        oLista.Add(new MenuPorVehiculoModel()
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Nombre = dr["nombre"].ToString(),
+                            NombreGrupo = dr["nombreGrupo"].ToString(),
+                            FechaInicio = Convert.ToDateTime(dr["fechaInicio"]),
+                            FechaFin = Convert.ToDateTime(dr["fechaFin"]),
+                            Recursos = dr["recursos"].ToString(),
+                            Responsables = dr["responsable"].ToString(),
+                            LugarDesde = dr["lugarDesde"].ToString(),
+                            LugarHacia = dr["lugarHacia"].ToString(),
+                            Observaciones = dr["observaciones"].ToString(),
+                            Lugar = dr["nombreVehiculo"].ToString()
+                        });
+                    }
+                }
+            }
+            return oLista;
+        }
 
     }
 }
