@@ -309,5 +309,41 @@ namespace AppIncalink.Datos
             return oLista;
         }
 
+
+        //Obtener vehiculo por grupo
+        public List<tipoActividadPorGrupoModel> ObtenerTipoActividadPorGrupo(int idGrupo)
+        {
+            var oLista = new List<tipoActividadPorGrupoModel>();
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ObtenerVehiculoPorGrupo", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        oLista.Add(new tipoActividadPorGrupoModel()
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Nombre = dr["nombre"].ToString(),
+                            NombreGrupo = dr["nombreGrupo"].ToString(),
+                            FechaInicio = Convert.ToDateTime(dr["fechaInicio"]),
+                            FechaFin = Convert.ToDateTime(dr["fechaFin"]),
+                            Recursos = dr["recursos"].ToString(),
+                            Responsables = dr["responsable"].ToString(),
+                            LugarDesde = dr["lugarDesde"].ToString(),
+                            LugarHacia = dr["lugarHacia"].ToString(),
+                            Observaciones = dr["observaciones"].ToString(),
+                            tipoActividad = dr["nombreTipoActividad"].ToString()
+                        });
+                    }
+                }
+            }
+            return oLista;
+        }
+
     }
 }

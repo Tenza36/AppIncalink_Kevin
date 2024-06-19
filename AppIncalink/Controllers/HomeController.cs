@@ -76,6 +76,16 @@ namespace AppIncalink.Controllers
                 FileDownloadName = "Menus_" + idGrupo.ToString() + ".pdf" // Nombre del archivo basado en el ID del grupo
             };
         }
+        public IActionResult GenerarVehiculoPdf(int idGrupo)
+        {
+            var actividades = _reporteDatos.ObtenerVehiculoPorGrupo(idGrupo);
+            var pdfStream = _reporteDatos.GenerateVehiculoPdf(actividades);
+
+            return new FileStreamResult(pdfStream, "application/pdf")
+            {
+                FileDownloadName = "Vehiculo_" + idGrupo.ToString() + ".pdf" // Nombre del archivo basado en el ID del grupo
+            };
+        }
 
 
 
