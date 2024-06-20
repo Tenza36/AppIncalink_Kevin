@@ -125,7 +125,16 @@ namespace AppIncalink.Controllers
             };
             return View(viewModel);
         }
-
+        public IActionResult ListarTipoActividad(int idGrupo)
+        {
+            var TipoActividad = _grupoDatos.ObtenerTipoActividadPorGrupo(idGrupo);
+            var viewModel = new TipoActividadViewModel
+            {
+                Id = idGrupo,
+                tipActividades = TipoActividad
+            };
+            return View(viewModel);
+        }
 
     }
 

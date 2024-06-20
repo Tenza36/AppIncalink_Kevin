@@ -87,6 +87,16 @@ namespace AppIncalink.Controllers
             };
         }
 
+        public IActionResult GenerarTipoActividadPdf(int idGrupo)
+        {
+            var actividades = _reporteDatos.ObtenerTipoActividadPorGrupo(idGrupo);
+            var pdfStream = _reporteDatos.GenerateTipoActividadPdf(actividades);
+
+            return new FileStreamResult(pdfStream, "application/pdf")
+            {
+                FileDownloadName = "Tipo de Actividad_" + idGrupo.ToString() + ".pdf" // Nombre del archivo basado en el ID del grupo
+            };
+        }
 
 
         public IActionResult Privacy()

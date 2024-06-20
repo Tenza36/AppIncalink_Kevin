@@ -1,0 +1,60 @@
+﻿@model AppIncalink.Models.TipoActividadViewModel
+@{
+    ViewData["Title"] = "ListarTipoActividad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a asp-action="Listar" asp-controller="grupo" class="btn btn-info">
+                    <i class="icon ion-md-people mr-2 lead"></i> Volver a Grupos
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br />
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped thead-dark table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Grupo</th>
+                <th scope="col">Fecha de Inicio</th>
+                <th scope="col">Fecha Final</th>
+                <th scope="col">Recursos</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Lugar Desde</th>
+                <th scope="col">Lugar Hacia</th>
+                <th scope="col">Observaciones</th>
+                <th scope="col">Tipo de Actividad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.tipActividades)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.NombreGrupo</td>
+                    <td>@item.FechaInicio</td>
+                    <td>@item.FechaFin</td>
+                    <td>@item.Recursos</td>
+                    <td>@item.Responsables</td>
+                    <td>@item.LugarDesde</td>
+                    <td>@item.LugarHacia</td>
+                    <td>@item.Observaciones</td>
+                    <td>@item.tipoActividad</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a asp-controller="Home" asp-action="GenerarTipoActividadPdf" asp-route-idGrupo="@Model.Id" class="btn btn-primary"><i class="fa fa-file-pdf-o mr-2"></i>Generar PDF</a>
+
+

@@ -318,7 +318,7 @@ namespace AppIncalink.Datos
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("ObtenerVehiculoPorGrupo", conexion);
+                SqlCommand cmd = new SqlCommand("ObtenerTipoActividadPorGrupo", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
                 using (var dr = cmd.ExecuteReader())

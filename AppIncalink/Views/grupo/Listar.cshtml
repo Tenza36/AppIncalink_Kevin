@@ -9,19 +9,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <td>
-                    <a asp-action="Guardar" asp-controller="grupo" class="btn btn-success"><i class="icon ion-md-people mr-2 lead"></i> Crear Grupo</a>
-                </td>
+                <a asp-action="Guardar" asp-controller="grupo" class="btn btn-success"><i class="icon ion-md-people mr-2 lead"></i> Crear Grupo</a>
             </div>
             <div class="col">
-                <td>
-                    <a asp-action="Listar" asp-controller="persona" class="btn btn-warning"><i class="icon ion-md-person mr-2 lead"></i> Crear Persona</a>
-                </td>
+                <a asp-action="Listar" asp-controller="persona" class="btn btn-warning"><i class="icon ion-md-person mr-2 lead"></i> Crear Persona</a>
             </div>
             <div class="col">
-                <td>
-                    <a asp-action="Listar" asp-controller="actividad" class="btn btn-info"><i class="icon ion-logo-dribbble mr-2 lead"></i> Crear Actividad</a>
-                </td>
+                <a asp-action="Listar" asp-controller="actividad" class="btn btn-info"><i class="icon ion-logo-dribbble mr-2 lead"></i> Crear Actividad</a>
             </div>
         </div>
     </div>
@@ -39,7 +33,9 @@
                 <th scope="col">Informacion del Vuelo</th>
                 <th scope="col">Itinerario del Vuelo</th>
                 <th scope="col">Observaciones</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Más Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -54,12 +50,23 @@
                     <td>@item.observaciones</td>
                     <td>
                         <a asp-action="Editar" asp-route-id="@item.id" class="btn btn-primary">Editar</a>
+                    </td>
+                    <td>
                         <a asp-action="Eliminar" asp-route-id="@item.id" class="btn btn-danger">Eliminar</a>
-                        <a asp-action="ListarPersonas" asp-route-idGrupo="@item.id" class="btn btn-warning">Ver Personas</a>
-                        <a asp-action="ListarCompras" asp-route-idGrupo="@item.id" class="btn btn-secondary">Ver Compras</a>
-                        <a asp-action="ListarMenus" asp-route-idGrupo="@item.id" class="btn btn-info">Ver Menús</a>
-                        <a asp-action="ListarTiposActividad" asp-route-idGrupo="@item.id" class="btn btn-success">Ver Tipos de Actividad</a>
-                        <a asp-action="ListarVehiculo" asp-route-idGrupo="@item.id" class="btn btn-dark">Ver Vehículos</a>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Acciones
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a asp-action="ListarPersonas" asp-route-idGrupo="@item.id" class="dropdown-item">Ver Personas</a>
+                                <a asp-action="ListarCompras" asp-route-idGrupo="@item.id" class="dropdown-item">Ver Compras</a>
+                                <a asp-action="ListarMenus" asp-route-idGrupo="@item.id" class="dropdown-item">Ver Menús</a>
+                                <a asp-action="ListarTipoActividad" asp-route-idGrupo="@item.id" class="dropdown-item">Ver Tipos de Actividad</a>
+                                <a asp-action="ListarVehiculo" asp-route-idGrupo="@item.id" class="dropdown-item">Ver Vehículos</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             }
